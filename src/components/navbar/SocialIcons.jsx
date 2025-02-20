@@ -19,12 +19,12 @@ const SocialIcons = () => {
   ];
 
   return (
-    <ul className='list-none flex gap-6 justify-center text-neutral-400  items-center '>
+    <ul className='list-none flex gap-6 md:gap-7 lg:gap-8 justify-center text-neutral-400  items-center '>
       {socialIconsList.map((item) => {
         return (
           <li
             key={item.href}
-            className='hover:text-white text-lg hover:scale-125 transition  duration-300 ease-in-out'
+            className='hover:text-white text-xl hover:scale-125 transition  duration-300 ease-in-out'
           >
             <a href={item.href} target='_blank'>
               {item.icon}

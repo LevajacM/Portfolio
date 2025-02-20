@@ -1,10 +1,9 @@
-import { BiBorderRadius } from "react-icons/bi";
-
 export const navLinks = [
   { id: 1, name: "home", link: "#home" },
   { id: 2, name: "about", link: "#about" },
   { id: 3, name: "projects", link: "#projects" },
-  { id: 4, name: "contact", link: "#contact" },
+  { id: 4, name: "approach", link: "#approach" },
+  { id: 5, name: "contact", link: "#contact" },
 ];
 
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
@@ -56,7 +55,7 @@ export const recentProjects = [
     subdesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dolorem recusandae rerum dignissimos natus deserunt suscipit, animi modi dolore nisi, minus amet sunt quasi ratione qui perspiciatis! Enim, quasi obcaecati!",
     href: "#",
-    texture: "/textures/project/project1.mp4",
+    texture: "/textures/coa-video.mp4",
     logo: "/photos/project-logo1.png",
     logoStyle: {
       backgroundColor: "#2A1816",
@@ -88,7 +87,7 @@ export const recentProjects = [
     subdesc:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dolorem recusandae rerum dignissimos natus deserunt suscipit, animi modi dolore nisi, minus amet sunt quasi ratione qui perspiciatis! Enim, quasi obcaecati!",
     href: "#",
-    texture: "/textures/project/project2.mp4",
+    texture: "/textures/1.mp4",
     logo: "/photos/project-logo2.png",
     logoStyle: {
       backgroundColor: "#13202F",
@@ -118,5 +117,43 @@ export const recentProjects = [
         path: "/photos/nextjs.png",
       },
     ],
+  },
+];
+
+export const approachList = [
+  {
+    id: 1,
+    title: "asdvasdv",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
+    icon: "/alideda-emb.png",
+    animation: "salute",
+  },
+  {
+    id: 2,
+    title: "asdvasdv",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
+    icon: "/alideda-emb.png",
+    animation: "victory",
+  },
+  {
+    id: 3,
+    title: "asdvasdv",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
+    icon: "/alideda-emb.png",
+    animation: "salute",
+  },
+  {
+    id: 4,
+    title: "asdvasdv",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
+    icon: "/alideda-emb.png",
+    animation: "clapping",
+  },
+  {
+    id: 5,
+    title: "asdvasdv",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
+    icon: "/alideda-emb.png",
+    animation: "victory",
   },
 ];

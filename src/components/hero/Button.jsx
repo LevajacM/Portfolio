@@ -6,7 +6,7 @@ const Button = ({ name, isBeam = false, containerClass }) => {
           <span className='btn-ping' />
           <span className='btn-ping_dot' />
         </span>
-      )}{" "}
+      )}
       {name}
     </button>
   );

@@ -6,15 +6,38 @@ Source: https://sketchfab.com/3d-models/cyberpunk-laptop-concept-design-fddc4e68
 Title: CyberPunk Laptop Concept Design
 */
 
-import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import React, { useRef, useEffect } from "react";
+import { useGLTF, useVideoTexture } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const LaptopCyber = (props) => {
+  const group = useRef();
+
   const { nodes, materials } = useGLTF(
     "/models/cyberpunk_laptop_concept_design.glb"
   );
+
+  const txt = useVideoTexture(
+    props.texture ? props.texture : "/textures/coa-video.mp4"
+  );
+
+  useEffect(() => {
+    if (txt) {
+      txt.rotate = Math.PI / 2;
+    }
+  }, [txt]);
+
+  useGSAP(() => {
+    gsap.from(group.current.rotation, {
+      y: Math.PI * 2,
+      duration: 0.5,
+      ease: "power3.out",
+    });
+  }, [txt]);
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group
         position={[0, 50.454, -8.888]}
         rotation={[-1.943, 0, -Math.PI / 2]}
@@ -31,7 +54,9 @@ const LaptopCyber = (props) => {
           receiveShadow
           geometry={nodes.Cube_Screen_0.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={txt} rotation={[0, 5, 0]} />
+        </mesh>
       </group>
       <mesh
         castShadow
