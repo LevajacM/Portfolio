@@ -1,4 +1,4 @@
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { approachList } from "../utils/list";
 import * as THREE from "three";
@@ -14,9 +14,64 @@ import {
 } from "@react-three/postprocessing";
 import { LUTCubeLoader, ToneMappingMode } from "postprocessing";
 import FlowerTransformed from "./Flower-transformed";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 
 const Approach = () => {
   const [speed, setSpeed] = useState(0.009);
+
+  //-----------------------------------------
+  const [isMobile, setIsMobile] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const screenWidth = window.innerWidth;
+  let animateWidth;
+  if (screenWidth > 1023) {
+    animateWidth = 0.59;
+  }
+  if (screenWidth <= 1023) {
+    animateWidth = 0.63;
+  }
+  console.log(scrollYProgress.get());
+
+  const checkWindowSize = () => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    if (screenWidth > 1023) {
+      animateWidth = 0.59;
+    }
+    if (screenWidth <= 1023) {
+      animateWidth = 0.63;
+    }
+
+    checkWindowSize();
+    window.addEventListener("resize", checkWindowSize);
+
+    return () => {
+      window.removeEventListener("resize", checkWindowSize);
+    };
+  }, [screenWidth]);
+
+  useMotionValueEvent(scrollYProgress, "change", (current) => {
+    if (typeof current === "number") {
+      if (current > animateWidth) {
+        setAnimate(true);
+      } else {
+        setAnimate(false);
+      }
+    }
+  });
+  //----------------------------------------
   const texture = useLoader(
     LUTCubeLoader,
     "/models/flower-transformed/F-6800-STD.cube"
@@ -97,33 +152,99 @@ const Approach = () => {
           </div>
           <div className='work-content'>
             <div className='sm:py-10 py-5 sm:px-5 px-2.5 '>
-              {approachList.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    onPointerOver={() => setSpeed(0.003)}
-                    onPointerOut={() => setSpeed(0.009)}
-                    className='work-content_container group '
-                  >
-                    <div className='flex flex-col h-full justify-start items-center py-2'>
-                      <div className='work-content_logo'>
-                        <img
-                          src={item.icon}
-                          alt='dvsdv'
-                          className='h-full w-full'
-                        />
+              {!isMobile ? (
+                <AnimatePresence mode='sync'>
+                  {approachList.map((item, ind) => {
+                    const delay = (ind + 1) / 3;
+                    return (
+                      <div
+                        key={item.id}
+                        onPointerOver={() => setSpeed(0.003)}
+                        onPointerOut={() => setSpeed(0.009)}
+                        className='work-content_container group '
+                      >
+                        <div className='flex flex-col h-full justify-start items-center py-2'>
+                          <motion.div
+                            initial={{
+                              opacity: 0,
+                              y: 0,
+                            }}
+                            animate={{
+                              y: animate ? 0 : 700,
+                              opacity: animate ? 1 : 0,
+                            }}
+                            transition={{
+                              duration: 0.2 + delay,
+                            }}
+                            className='work-content_logo'
+                          >
+                            <img
+                              src={item.icon}
+                              alt='dvsdv'
+                              className='h-full w-full'
+                            />
+                          </motion.div>
+                          <div className='work-content_bar' />
+                        </div>
+                        <div className='sm:p-5 px-2.5 py-5'>
+                          <p className='font-bold text-white-800'>
+                            {item.title}
+                          </p>
+                          <p className='group-hover:text-white transition ease-in-out duration-500'>
+                            {item.desc}
+                          </p>
+                        </div>
                       </div>
-                      <div className='work-content_bar' />
-                    </div>
-                    <div className='sm:p-5 px-2.5 py-5'>
-                      <p className='font-bold text-white-800'>{item.title}</p>
-                      <p className='group-hover:text-white transition ease-in-out duration-500'>
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  })}
+                </AnimatePresence>
+              ) : (
+                <>
+                  {approachList.map((item, ind) => {
+                    const delay = (ind + 1) / 3;
+                    return (
+                      <div
+                        key={item.id}
+                        onPointerOver={() => setSpeed(0.003)}
+                        onPointerOut={() => setSpeed(0.009)}
+                        className='work-content_container group '
+                      >
+                        <div className='flex flex-col h-full justify-start items-center py-2'>
+                          <motion.div
+                            initial={{
+                              opacity: 0,
+                              y: 0,
+                            }}
+                            animate={{
+                              y: animate ? 0 : 700,
+                              opacity: animate ? 1 : 0,
+                            }}
+                            transition={{
+                              duration: 0.2 + delay,
+                            }}
+                            className='work-content_logo'
+                          >
+                            <img
+                              src={item.icon}
+                              alt='dvsdv'
+                              className='h-full w-full'
+                            />
+                          </motion.div>
+                          <div className='work-content_bar' />
+                        </div>
+                        <div className='sm:p-5 px-2.5 py-5'>
+                          <p className='font-bold text-white-800'>
+                            {item.title}
+                          </p>
+                          <p className='group-hover:text-white transition ease-in-out duration-500'>
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </div>
         </div>
