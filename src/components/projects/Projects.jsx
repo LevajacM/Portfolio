@@ -92,7 +92,7 @@ const Projects = () => {
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: 0.9,
               }}
               className='flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200'
             >

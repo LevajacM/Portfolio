@@ -1,6 +1,6 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Center } from "@react-three/drei";
+import { Center, OrbitControls } from "@react-three/drei";
 import CanvasLoader from "../hero/CanvasLoader";
 import SpaceStation from "./SpaceStation";
 import Button from "../hero/Button";
@@ -12,7 +12,58 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+//******************************************
+import Css3LogoA from "../3dLogoAbout/Css3LogoA";
+import FramerLogoA from "../3dLogoAbout/FramerLogoA";
+import JSLogoA from "../3dLogoAbout/JSLogoA";
+import NextjsLogoA from "../3dLogoAbout/NextjsLogoA";
+import ReactLogoA from "../3dLogoAbout/ReactLogoA";
+import TailwindLogoA from "../3dLogoAbout/TailwindLogoA";
+import TypescriptLogoA from "../3dLogoAbout/TypescriptLogoA";
+import Arrow from "./Arrow";
+import Technotron from "./Technotron";
+//******************************************
 
+const SceneOne = () => {
+  const logoScale = 0.04;
+
+  return (
+    <Suspense fallback={<CanvasLoader />}>
+      <ambientLight intensity={1.5} />
+      <directionalLight position={[10, 10, 35]} />
+      <Center>
+        <group
+          // scale={1}
+          position={[0, 0, 0]}
+          // rotation={[-0.7, -0.3, 0.4]}
+        >
+          <Css3LogoA scale={logoScale} position={[0, 2.5, 0]} />
+          <FramerLogoA scale={logoScale} position={[2.5, -1.25, 0]} />
+          <JSLogoA scale={logoScale} position={[-2.5, 1.25, 0]} />
+          <NextjsLogoA scale={logoScale} position={[0, -2.5, 0]} />
+          <ReactLogoA scale={logoScale} position={[0, 0, 0]} />
+          <TailwindLogoA scale={logoScale} position={[2.5, 1.25, 0]} />
+          <TypescriptLogoA scale={logoScale} position={[-2.5, -1.25, 0]} />
+        </group>
+      </Center>
+    </Suspense>
+  );
+};
+
+const SceneTwo = () => {
+  return (
+    <Suspense fallback={<CanvasLoader />}>
+      <ambientLight intensity={1} />
+      <directionalLight position={[10, 10, 5]} />
+      <Center>
+        <group scale={2.5} position={[0.5, -2.1, 0]} rotation={[0, 4, 0]}>
+          <EarthHolo />
+        </group>
+      </Center>
+    </Suspense>
+  );
+};
+//******************************************
 const AboutSection = () => {
   const [copyText, setCopyText] = useState(false);
   //----------------------------------------
@@ -73,6 +124,11 @@ const AboutSection = () => {
     }, 5000);
   };
 
+  const delay = 0.9;
+  const logoScale = 0.04;
+  const robotY = -93;
+  //---------------------------------------
+
   return (
     <section className='c-space my-20' id='about'>
       {!isMobile ? (
@@ -89,7 +145,7 @@ const AboutSection = () => {
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: delay,
               }}
               className='col-span-1 xl:row-span-3'
             >
@@ -100,12 +156,13 @@ const AboutSection = () => {
                   className='w-full sm:h-[276px] h-fit object-contain'
                 />
                 <div>
-                  <p className='grid-headtext'>sdfbs sbsb sbsrbs</p>
+                  <p className='grid-headtext'>About me</p>
                   <p className='grid-subtext'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Deleniti delectus rerum expedita totam cupiditate ipsa
-                    labore adipisci, voluptatem, at, mollitia nesciunt
-                    asperiores quas qui eveniet!
+                    I&apos;m a passionate web developer focused on modern
+                    frontend and interactive user experiences. I love building
+                    elegant, fast, and functional solutions using the latest
+                    technologies. Always exploring new concepts and striving for
+                    continuous improvement.
                   </p>
                 </div>
               </div>
@@ -117,26 +174,24 @@ const AboutSection = () => {
                 y: 0,
               }}
               animate={{
-                rotateY: animate ? 0 : 90,
+                // rotateY: animate ? 0 : 90,
                 // x: animate ? 0 : -300,
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: delay,
               }}
               className='col-span-1 row-span-3'
             >
               <div className='grid-container'>
-                <img
-                  src='/photos/grid3.png'
-                  alt='photo2'
-                  className='w-full sm:h-[276px] h-fit object-contain'
-                />
+                <Canvas key={1} className='w-full sm:h-[276px] h-fit'>
+                  <SceneOne />
+                </Canvas>
                 <div>
                   <p className='grid-headtext'>Tech Stack</p>
                   <p className='grid-subtext'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Accusamus soluta magnam, vero obcaecati ut ullam?
+                    I&apos;ve built projects using JavaScript, CSS, Tailwind,
+                    React, TypeScript, and Next.js.
                   </p>
                 </div>
               </div>
@@ -153,33 +208,25 @@ const AboutSection = () => {
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: delay,
               }}
               className='col-span-1 row-span-4'
             >
               <div className='grid-container'>
                 <div className='mt-8 rounded-3xl w-full sm:h-[326px] h-full flex justify-center items-center'>
-                  <Canvas>
-                    <ambientLight intensity={1} />
-                    <directionalLight position={[10, 10, 5]} />
-                    <Center>
-                      <Suspense fallback={<CanvasLoader />}>
-                        <group
-                          scale={1}
-                          position={[0, 0, 0]}
-                          rotation={[-0.7, -0.3, 0.4]}
-                        >
-                          <SpaceStation />
-                        </group>
-                      </Suspense>
-                    </Center>
-                  </Canvas>
+                  <img
+                    src='/photos/majstor.png'
+                    alt='repair man'
+                    className='w-full h-fit sm:h-[276px]  object-cover object-center md:mt-10'
+                  />
                 </div>
                 <div className='mt-10 md:mt-20'>
-                  <p className='grid-headtext'>Lorem ipsum dolor sit amet.</p>
+                  <p className='grid-headtext'>Fast & Reliable Websites</p>
                   <p className='grid-subtext'>
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Inventore, eos.
+                    If you need a website built quickly and with high quality,
+                    I&apos;m here to help. I specialize in creating clean,
+                    functional, and responsive websites tailored to your needs.
+                    Let&apos;s bring your idea to life!
                   </p>
                   <Button name='Contact' isBeam containerClass='w-full mt-10' />
                 </div>
@@ -197,21 +244,27 @@ const AboutSection = () => {
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: delay,
               }}
               className='xl:col-span-2 xl:row-span-3 '
             >
               <div className='grid-container'>
-                <img
-                  src='/photos/grid2.webp'
-                  alt='grid2-photo'
-                  className='w-full sm:h-[266px] h-fit object-contain'
-                />
+                <Canvas>
+                  <Suspense fallback={<CanvasLoader />}>
+                    <ambientLight intensity={1} />
+                    <directionalLight position={[10, 10, 5]} />
+                    {/* <OrbitControls /> */}
+                    <Center position={[0, -0.4, 0]} scale={2.1}>
+                      <Technotron />
+                    </Center>
+                  </Suspense>
+                </Canvas>
                 <div>
-                  <p className='grid-headtext'>Lorem ipsum dolor sit amet.</p>
+                  <p className='grid-headtext'>On the Horizon</p>
                   <p className='grid-subtext'>
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Inventore, eos.
+                    Continuing to enhance my skills in JavaScript, React, and
+                    Next.js, while exploring 3D modeling and deepening my
+                    knowledge of Three.js and related technologies.
                   </p>
                 </div>
               </div>
@@ -227,18 +280,22 @@ const AboutSection = () => {
                 opacity: animate ? 1 : 0,
               }}
               transition={{
-                duration: 0.7,
+                duration: delay,
               }}
               className='xl:col-span-1 xl:row-span-2 '
             >
               <div className='grid-container'>
-                <img
-                  src='/photos/grid4.webp'
-                  alt='grid4 photo'
-                  className='w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top'
-                />
+                <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
+                  <Suspense fallback={<CanvasLoader />}>
+                    <ambientLight intensity={2.5} />
+                    <directionalLight position={[-10, 10, 5]} />
+                    <Center>
+                      <Arrow scale={2.5} position={[1.3, -1.9, 0]} />
+                    </Center>
+                  </Suspense>
+                </Canvas>
+
                 <div className='space-y-2'>
-                  <p className='grid-subtext text-center'>Contact me</p>
                   <div className='copy-container' onClick={handleCopy}>
                     {copyText ? (
                       <span className='inline grid-headtext mt-16'>
@@ -270,12 +327,13 @@ const AboutSection = () => {
                 className='w-full sm:h-[276px] h-fit object-contain'
               />
               <div>
-                <p className='grid-headtext'>sdfbs sbsb sbsrbs</p>
+                <p className='grid-headtext'>About me</p>
                 <p className='grid-subtext'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Deleniti delectus rerum expedita totam cupiditate ipsa labore
-                  adipisci, voluptatem, at, mollitia nesciunt asperiores quas
-                  qui eveniet!
+                  I&apos;m a passionate web developer focused on modern frontend
+                  and interactive user experiences. I love building elegant,
+                  fast, and functional solutions using the latest technologies.
+                  Always exploring new concepts and striving for continuous
+                  improvement.
                 </p>
               </div>
             </div>
@@ -283,16 +341,15 @@ const AboutSection = () => {
 
           <div className='col-span-1 row-span-3'>
             <div className='grid-container'>
-              <img
-                src='/photos/grid3.png'
-                alt='photo2'
-                className='w-full sm:h-[276px] h-fit object-contain'
-              />
+              <Canvas key={1} className='w-full sm:h-[276px] h-fit'>
+                <SceneOne />
+              </Canvas>
+
               <div>
                 <p className='grid-headtext'>Tech Stack</p>
                 <p className='grid-subtext'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Accusamus soluta magnam, vero obcaecati ut ullam?
+                  I&apos;ve built projects using JavaScript, CSS, Tailwind,
+                  React, TypeScript, and Next.js.
                 </p>
               </div>
             </div>
@@ -300,27 +357,19 @@ const AboutSection = () => {
           <div className='col-span-1 row-span-4'>
             <div className='grid-container'>
               <div className='mt-8 rounded-3xl w-full sm:h-[326px] h-full flex justify-center items-center'>
-                <Canvas>
-                  <ambientLight intensity={1} />
-                  <directionalLight position={[10, 10, 5]} />
-                  <Center>
-                    <Suspense fallback={<CanvasLoader />}>
-                      <group
-                        scale={1}
-                        position={[0, 0, 0]}
-                        rotation={[-0.7, -0.3, 0.4]}
-                      >
-                        <SpaceStation />
-                      </group>
-                    </Suspense>
-                  </Center>
-                </Canvas>
+                <img
+                  src='/photos/majstor.png'
+                  alt='repair man'
+                  className='w-full sm:h-[276px] h-fit '
+                />
               </div>
               <div className='mt-10 md:mt-20'>
-                <p className='grid-headtext'>Lorem ipsum dolor sit amet.</p>
+                <p className='grid-headtext'>Fast & Reliable Websites</p>
                 <p className='grid-subtext'>
-                  Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Inventore, eos.
+                  If you need a website built quickly and with high quality,
+                  I&apos;m here to help. I specialize in creating clean,
+                  functional, and responsive websites tailored to your needs.
+                  Let&apos;s bring your idea to life!
                 </p>
                 <Button name='Contact' isBeam containerClass='w-full mt-10' />
               </div>
@@ -328,29 +377,37 @@ const AboutSection = () => {
           </div>
           <div className='xl:col-span-2 xl:row-span-3 '>
             <div className='grid-container'>
-              <img
-                src='/photos/grid2.webp'
-                alt='grid2-photo'
-                className='w-full sm:h-[266px] h-fit object-contain'
-              />
+              <Canvas>
+                <Suspense fallback={<CanvasLoader />}>
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[10, 10, 5]} />
+                  <Center position={[0, -0.4, 0]} scale={2.1}>
+                    <Technotron />
+                  </Center>
+                </Suspense>
+              </Canvas>
               <div>
-                <p className='grid-headtext'>Lorem ipsum dolor sit amet.</p>
+                <p className='grid-headtext'>On the Horizon</p>
                 <p className='grid-subtext'>
-                  Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Inventore, eos.
+                  Continuing to enhance my skills in JavaScript, React, and
+                  Next.js, while exploring 3D modeling and deepening my
+                  knowledge of Three.js and related technologies.
                 </p>
               </div>
             </div>
           </div>
           <div className='xl:col-span-1 xl:row-span-2 '>
             <div className='grid-container'>
-              <img
-                src='/photos/grid4.webp'
-                alt='grid4 photo'
-                className='w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top'
-              />
+              <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
+                <Suspense fallback={<CanvasLoader />}>
+                  <ambientLight intensity={2.5} />
+                  <directionalLight position={[-10, 10, 5]} />
+                  <Center>
+                    <Arrow scale={2.5} position={[1.3, -2.4, 0]} />
+                  </Center>
+                </Suspense>
+              </Canvas>
               <div className='space-y-2'>
-                <p className='grid-subtext text-center'>Contact me</p>
                 <div className='copy-container' onClick={handleCopy}>
                   {copyText ? (
                     <span className='inline grid-headtext mt-16'>

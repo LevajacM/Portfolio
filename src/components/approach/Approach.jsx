@@ -36,7 +36,6 @@ const Approach = () => {
   if (screenWidth <= 1023) {
     animateWidth = 0.63;
   }
-  console.log(scrollYProgress.get());
 
   const checkWindowSize = () => {
     if (window.innerWidth < 768) {
@@ -155,7 +154,8 @@ const Approach = () => {
               {!isMobile ? (
                 <AnimatePresence mode='sync'>
                   {approachList.map((item, ind) => {
-                    const delay = (ind + 1) / 3;
+                    const delay = (ind + 0.5) / 2.4 + 1;
+                    const delay2 = delay + 2;
                     return (
                       <div
                         key={item.id}
@@ -170,30 +170,44 @@ const Approach = () => {
                               y: 0,
                             }}
                             animate={{
-                              y: animate ? 0 : 700,
+                              y: animate ? 0 : 400,
                               opacity: animate ? 1 : 0,
                             }}
                             transition={{
                               duration: 0.2 + delay,
                             }}
-                            className='work-content_logo'
+                            className='work-content_logo mt-4  '
                           >
                             <img
                               src={item.icon}
-                              alt='dvsdv'
-                              className='h-full w-full'
+                              alt='phase-icon'
+                              className='h-full w-full rounded-lg'
                             />
                           </motion.div>
-                          <div className='work-content_bar' />
+                          <div className='work-content_bar ' />
                         </div>
-                        <div className='sm:p-5 px-2.5 py-5'>
+                        <motion.div
+                          initial={{
+                            opacity: 0,
+                            y: 0,
+                          }}
+                          animate={{
+                            rotateX: animate ? 0 : -90,
+
+                            opacity: animate ? 1 : 0,
+                          }}
+                          transition={{
+                            duration: 0.2 + delay2,
+                          }}
+                          className='sm:p-5 px-2.5 py-5'
+                        >
                           <p className='font-bold text-white-800'>
                             {item.title}
                           </p>
                           <p className='group-hover:text-white transition ease-in-out duration-500'>
                             {item.desc}
                           </p>
-                        </div>
+                        </motion.div>
                       </div>
                     );
                   })}

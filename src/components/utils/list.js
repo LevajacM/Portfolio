@@ -29,21 +29,21 @@ export const calculateSizes = (isSmall, isMobile, isTablet) => {
         ? [5.5, 5, 0]
         : isTablet
           ? [10, 4, 0]
-          : [12, 3, 0],
+          : [20, 5, -30],
     htmlPosition: isSmall
       ? [-4.5, 2.5, 0]
       : isMobile
         ? [-5, 2.4, 0]
         : isTablet
           ? [-10, 1.5, 0]
-          : [-11, 0.7, 0],
+          : [-7, 0.9, -2],
     mPosition: isSmall
       ? [-6.9, -2.5, -18]
       : isMobile
         ? [-7.5, -12, -15]
         : isTablet
           ? [-15.5, -13.8, -16]
-          : [-18, -15, -16],
+          : [-9, 3, -10],
     //------------------------------------------------
   };
 };
@@ -123,37 +123,33 @@ export const recentProjects = [
 export const approachList = [
   {
     id: 1,
-    title: "asdvasdv",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
-    icon: "/alideda-emb.png",
-    animation: "salute",
+    title: "Planning",
+    desc: "Defining website goals, structure, and features to ensure clarity, usability, and effectiveness.",
+    icon: "/icons/planning.gif",
   },
   {
     id: 2,
-    title: "asdvasdv",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
-    icon: "/alideda-emb.png",
-    animation: "victory",
+    title: "Design",
+    desc: "Creating a clean, intuitive, and visually appealing interface that enhances user experience.",
+    icon: "/icons/digital-art.gif",
   },
   {
     id: 3,
-    title: "asdvasdv",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
-    icon: "/alideda-emb.png",
-    animation: "salute",
+    title: "Development",
+    desc: "Writing efficient, scalable code to build a responsive, high-performance, and functional website.",
+    icon: "/icons/web-developer.gif",
   },
   {
     id: 4,
-    title: "asdvasdv",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
-    icon: "/alideda-emb.png",
-    animation: "clapping",
+    title: "Launch & Optimization",
+    desc: "Deploying the site, testing across devices, and refining for speed, SEO, and usability.",
+    icon: "/icons/responsive.gif",
   },
   {
     id: 5,
-    title: "asdvasdv",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio at placeat ullam fugiat repellat quis consequatur alias eius cupiditate?",
-    icon: "/alideda-emb.png",
-    animation: "victory",
+    title: "Ongoing Support",
+    desc: "Available for future updates, troubleshooting, or improvements to keep everything running smoothly.",
+    icon: "/icons/virtual-assistant.gif",
   },
+  //credits - <a href="https://www.flaticon.com/free-animated-icons/rocket" title="rocket animated icons">Rocket animated icons created by Freepik - Flaticon</a>
 ];

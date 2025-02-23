@@ -57,7 +57,7 @@ body {
 
   /* hero section */
   .hero_tag {
-    @apply text-center xl:text-6xl md:text-5xl sm:text-4xl text-3xl font-generalsans font-black !leading-normal;
+    @apply text-center xl:text-4xl md:text-3xl sm:text-2xl text-xl font-generalsans font-black !leading-normal;
   }
 
   /* about section */
@@ -117,11 +117,12 @@ body {
   }
 
   .work-content_logo {
-    @apply rounded-3xl w-16 h-16 p-2 bg-black-600;
+    @apply rounded-xl w-11 h-11 p-1 bg-white-600;
+    /* bg-black-600 */
   }
 
   .work-content_bar {
-    @apply flex-1 w-0.5 mt-4 h-full bg-black-300 group-hover:bg-black-500 group-last:hidden;
+    @apply flex-1 w-0.5 mt-4 pt-4 h-full bg-black-300 group-hover:bg-black-500 group-last:hidden;
   }
 
   /* contact section */

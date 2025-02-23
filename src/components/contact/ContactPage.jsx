@@ -52,13 +52,11 @@ const ContactPage = () => {
     <section id='contact' className='c-space my-20'>
       <div className='min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300'>
         <div className='contact-container'>
-          <h3 className='head-text'>lets talk</h3>
-          <p className='text-lg text-white-600 mt-3'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis,
-            a! Dolorum voluptates iste accusantium alias quaerat eveniet aperiam
-            et quisquam ipsam voluptatibus assumenda excepturi quidem animi esse
-            commodi eius libero earum aliquid, officia laudantium sapiente!
-            Harum unde ad ratione! Non!
+          <h3 className='head-text'>Contact Me</h3>
+          <p className='text-lg text-white-600 mt-12'>
+            If you would like to get in touch, feel free to send a message.
+            Whether it is a question, a project idea, or just a quick hello, I
+            would be happy to hear from you.
           </p>
           <form
             ref={formRef}
