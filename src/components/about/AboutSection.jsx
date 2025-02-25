@@ -19,7 +19,6 @@ import NextjsLogoA from "../3dLogoAbout/NextjsLogoA";
 import ReactLogoA from "../3dLogoAbout/ReactLogoA";
 import TailwindLogoA from "../3dLogoAbout/TailwindLogoA";
 import TypescriptLogoA from "../3dLogoAbout/TypescriptLogoA";
-import Arrow from "./Arrow";
 import Technotron from "./Technotron";
 //******************************************
 import Car from "../proba/Car";
