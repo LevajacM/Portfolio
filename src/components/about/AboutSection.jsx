@@ -2,7 +2,6 @@ import { useState, Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
 import CanvasLoader from "../hero/CanvasLoader";
-import SpaceStation from "./SpaceStation";
 import Button from "../hero/Button";
 import { IoCopy } from "react-icons/io5";
 import { GiCheckMark } from "react-icons/gi";
@@ -22,6 +21,10 @@ import TailwindLogoA from "../3dLogoAbout/TailwindLogoA";
 import TypescriptLogoA from "../3dLogoAbout/TypescriptLogoA";
 import Arrow from "./Arrow";
 import Technotron from "./Technotron";
+//******************************************
+import Car from "../proba/Car";
+import Coral from "../proba/Coral";
+import Turret from "../proba/Turret";
 //******************************************
 
 const SceneOne = () => {
@@ -51,13 +54,38 @@ const SceneOne = () => {
 };
 
 const SceneTwo = () => {
+  // const { camera } = useThree();
+  // camera.position.set(0, 0, 12); //SpaceTravel
+
+  return (
+    <Suspense fallback={<CanvasLoader />}>
+      <ambientLight intensity={2} />
+      <directionalLight position={[10, 10, 15]} />
+      <Center position={[0, -0.4, 0]} scale={2.1}>
+        <Technotron />
+      </Center>
+      {/* <Center> */}
+      {/* <group scale={2.9} position={[0, -0.8, 0]} rotation={[0, 1.4, 0]}>
+          <Coral />
+        </group> */}
+      {/* <group scale={0.015} position={[0.5, 1, -11.5]} rotation={[0, 0, 0]}>
+          <SpaceTravel />
+        </group> */}
+      {/* </Center> */}
+    </Suspense>
+  );
+};
+
+const Scene3 = () => {
   return (
     <Suspense fallback={<CanvasLoader />}>
       <ambientLight intensity={1} />
       <directionalLight position={[10, 10, 5]} />
-      <Center>
-        <group scale={2.5} position={[0.5, -2.1, 0]} rotation={[0, 4, 0]}>
-          <EarthHolo />
+      <OrbitControls />
+
+      <Center position={[0, 0, 0]}>
+        <group scale={1.2} position={[0, 0, 0]} rotation={[0, 4, 0]}>
+          <Car />
         </group>
       </Center>
     </Suspense>
@@ -124,6 +152,8 @@ const AboutSection = () => {
     }, 5000);
   };
 
+  //car
+
   const delay = 0.9;
   const logoScale = 0.04;
   const robotY = -93;
@@ -149,22 +179,19 @@ const AboutSection = () => {
               }}
               className='col-span-1 xl:row-span-3'
             >
-              <div className='grid-container'>
-                <img
-                  src='/photos/hero1.jpeg'
-                  alt='photo1'
-                  className='w-full sm:h-[276px] h-fit object-contain'
-                />
+              <div className='grid-container !gap-0'>
+                {/* ---------------------------------------- */}
+                <Canvas key={1} className='w-full sm:h-[276px] h-[200px]'>
+                  <SceneOne />
+                </Canvas>
                 <div>
-                  <p className='grid-headtext'>About me</p>
+                  <p className='grid-headtext'>Tech Stack</p>
                   <p className='grid-subtext'>
-                    I&apos;m a passionate web developer focused on modern
-                    frontend and interactive user experiences. I love building
-                    elegant, fast, and functional solutions using the latest
-                    technologies. Always exploring new concepts and striving for
-                    continuous improvement.
+                    I&apos;ve built projects using JavaScript, CSS, Tailwind,
+                    React, TypeScript, React-three-fiber, and Next.js.
                   </p>
                 </div>
+                {/* ---------------------------------------- */}
               </div>
             </motion.div>
 
@@ -184,16 +211,24 @@ const AboutSection = () => {
               className='col-span-1 row-span-3'
             >
               <div className='grid-container'>
-                <Canvas key={1} className='w-full sm:h-[276px] h-fit'>
-                  <SceneOne />
-                </Canvas>
+                {/* ---------------------------------------- */}
+                <img
+                  src='/photos/avatar2.webp'
+                  alt='avatar'
+                  className='w-full sm:h-[250px] h-fit object-contain'
+                />
+
                 <div>
-                  <p className='grid-headtext'>Tech Stack</p>
+                  <p className='grid-headtext'>About me</p>
                   <p className='grid-subtext'>
-                    I&apos;ve built projects using JavaScript, CSS, Tailwind,
-                    React, TypeScript, and Next.js.
+                    I&apos;m a passionate web developer focused on modern
+                    frontend and interactive user experiences. I love building
+                    elegant, fast, and functional solutions using the latest
+                    technologies. Always exploring new concepts and striving for
+                    continuous improvement.
                   </p>
                 </div>
+                {/* ---------------------------------------- */}
               </div>
             </motion.div>
 
@@ -210,17 +245,20 @@ const AboutSection = () => {
               transition={{
                 duration: delay,
               }}
-              className='col-span-1 row-span-4'
+              className='col-span-1 row-span-4 '
             >
-              <div className='grid-container'>
-                <div className='mt-8 rounded-3xl w-full sm:h-[326px] h-full flex justify-center items-center'>
-                  <img
-                    src='/photos/majstor.png'
-                    alt='repair man'
-                    className='w-full h-fit sm:h-[276px]  object-cover object-center md:mt-10'
-                  />
+              <div className='grid-container '>
+                <div className=' rounded-3xl w-full sm:h-[350px] md:h-[370px]  h-full flex justify-center items-center'>
+                  <Canvas
+                    // camera={{ position: [0, 0, -5] }}
+                    key={2}
+                    className='w-full h-fit  rounded-md'
+                  >
+                    <OrbitControls />
+                    <SceneTwo />
+                  </Canvas>
                 </div>
-                <div className='mt-10 md:mt-20'>
+                <div className='mt-2 md:mt-15'>
                   <p className='grid-headtext'>Fast & Reliable Websites</p>
                   <p className='grid-subtext'>
                     If you need a website built quickly and with high quality,
@@ -248,16 +286,9 @@ const AboutSection = () => {
               }}
               className='xl:col-span-2 xl:row-span-3 '
             >
-              <div className='grid-container'>
-                <Canvas>
-                  <Suspense fallback={<CanvasLoader />}>
-                    <ambientLight intensity={1} />
-                    <directionalLight position={[10, 10, 5]} />
-                    {/* <OrbitControls /> */}
-                    <Center position={[0, -0.4, 0]} scale={2.1}>
-                      <Technotron />
-                    </Center>
-                  </Suspense>
+              <div className='grid-container lg:h-[450px]'>
+                <Canvas className='rounded-md h-fit'>
+                  <Scene3 />
                 </Canvas>
                 <div>
                   <p className='grid-headtext'>On the Horizon</p>
@@ -284,13 +315,20 @@ const AboutSection = () => {
               }}
               className='xl:col-span-1 xl:row-span-2 '
             >
-              <div className='grid-container'>
+              <div className='grid-container lg:h-[270px] !pt-0 !gap-2'>
                 <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
                   <Suspense fallback={<CanvasLoader />}>
                     <ambientLight intensity={2.5} />
                     <directionalLight position={[-10, 10, 5]} />
                     <Center>
-                      <Arrow scale={2.5} position={[1.3, -1.9, 0]} />
+                      {/* <Arrow scale={2.5} position={[1.3, -1.9, 0]} /> */}
+                      <group
+                        scale={0.009}
+                        position={[0, -5.75, 0]}
+                        rotation={[0, 0, 0]}
+                      >
+                        <Turret />
+                      </group>
                     </Center>
                   </Suspense>
                 </Canvas>
@@ -298,7 +336,7 @@ const AboutSection = () => {
                 <div className='space-y-2'>
                   <div className='copy-container' onClick={handleCopy}>
                     {copyText ? (
-                      <span className='inline grid-headtext mt-16'>
+                      <span className='inline grid-headtext mt-2'>
                         Email copied successfully{"  "}
                         <GiCheckMark className='inline text-green-400 ' />
                       </span>
@@ -306,7 +344,7 @@ const AboutSection = () => {
                       <Button
                         name='Copy my email'
                         isBeam
-                        containerClass='mt-10 grid-headtext'
+                        containerClass='mt-2 grid-headtext'
                       >
                         <IoCopy />
                       </Button>
@@ -322,9 +360,9 @@ const AboutSection = () => {
           <div className='col-span-1 xl:row-span-3'>
             <div className='grid-container'>
               <img
-                src='/photos/hero1.jpeg'
-                alt='photo1'
-                className='w-full sm:h-[276px] h-fit object-contain'
+                src='/photos/avatar2.webp'
+                alt='avatar'
+                className='w-full sm:h-[250px] h-[250px] object-contain'
               />
               <div>
                 <p className='grid-headtext'>About me</p>
@@ -349,21 +387,20 @@ const AboutSection = () => {
                 <p className='grid-headtext'>Tech Stack</p>
                 <p className='grid-subtext'>
                   I&apos;ve built projects using JavaScript, CSS, Tailwind,
-                  React, TypeScript, and Next.js.
+                  React, TypeScript, React-three-fiber, and Next.js.
                 </p>
               </div>
             </div>
           </div>
           <div className='col-span-1 row-span-4'>
             <div className='grid-container'>
-              <div className='mt-8 rounded-3xl w-full sm:h-[326px] h-full flex justify-center items-center'>
-                <img
-                  src='/photos/majstor.png'
-                  alt='repair man'
-                  className='w-full sm:h-[276px] h-fit '
-                />
+              <div className='mt-8 rounded-3xl w-full sm:h-[350px] h-full flex justify-center items-center'>
+                <Canvas key={2} className='w-full  h-fit'>
+                  <OrbitControls />
+                  <SceneTwo />
+                </Canvas>
               </div>
-              <div className='mt-10 md:mt-20'>
+              <div className='mt-2 md:mt-20'>
                 <p className='grid-headtext'>Fast & Reliable Websites</p>
                 <p className='grid-subtext'>
                   If you need a website built quickly and with high quality,
@@ -378,13 +415,7 @@ const AboutSection = () => {
           <div className='xl:col-span-2 xl:row-span-3 '>
             <div className='grid-container'>
               <Canvas>
-                <Suspense fallback={<CanvasLoader />}>
-                  <ambientLight intensity={1} />
-                  <directionalLight position={[10, 10, 5]} />
-                  <Center position={[0, -0.4, 0]} scale={2.1}>
-                    <Technotron />
-                  </Center>
-                </Suspense>
+                <Scene3 />
               </Canvas>
               <div>
                 <p className='grid-headtext'>On the Horizon</p>
@@ -403,7 +434,14 @@ const AboutSection = () => {
                   <ambientLight intensity={2.5} />
                   <directionalLight position={[-10, 10, 5]} />
                   <Center>
-                    <Arrow scale={2.5} position={[1.3, -2.4, 0]} />
+                    {/* <Arrow scale={2.5} position={[1.3, -2.4, 0]} /> */}
+                    <group
+                      scale={0.009}
+                      position={[0, -4.5, 0]}
+                      rotation={[0, 0, 0]}
+                    >
+                      <Turret />
+                    </group>
                   </Center>
                 </Suspense>
               </Canvas>

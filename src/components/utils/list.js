@@ -9,42 +9,35 @@ export const navLinks = [
 export const calculateSizes = (isSmall, isMobile, isTablet) => {
   return {
     //------------------------------------------------
-    deskScale: isSmall ? 2 : isMobile ? 3.8 : 4.8,
-    deskPosition: isSmall
-      ? [0.3, 0.3, 7.5]
+    bonsaiScale: isSmall ? 0.039 : isMobile ? 0.05 : 0.07,
+    bonsaiPosition: isSmall ? [1, -2, 0] : isMobile ? [2, -2, 0] : [2.2, -2, 0],
+    //---------------------------------
+    moonScale: isSmall ? 0.9 : isMobile ? 1.1 : 1.3,
+    moonPosition: isSmall
+      ? [0, 9, -10]
       : isMobile
-        ? [0.15, -3.1, 7.5]
-        : [0.3, -4.3, 8],
-    //---------------------------------????????????????
-    lPosition: isSmall
-      ? [7.7, -2.6, -18]
-      : isMobile
-        ? [7.6, -12, -15]
-        : isTablet
-          ? [15, -13.8, -15]
-          : [18.3, -15, -16],
-    reactLogoPosition: isSmall
-      ? [5, 5, 0]
-      : isMobile
-        ? [5.5, 5, 0]
-        : isTablet
-          ? [10, 4, 0]
-          : [20, 5, -30],
-    htmlPosition: isSmall
-      ? [-4.5, 2.5, 0]
-      : isMobile
-        ? [-5, 2.4, 0]
-        : isTablet
-          ? [-10, 1.5, 0]
-          : [-7, 0.9, -2],
-    mPosition: isSmall
-      ? [-6.9, -2.5, -18]
-      : isMobile
-        ? [-7.5, -12, -15]
-        : isTablet
-          ? [-15.5, -13.8, -16]
-          : [-9, 3, -10],
+        ? [0.6, 9, -10]
+        : [0, 9, -10],
+    //--------------------------------
+    logoScale: isSmall ? 0.015 : isMobile ? 0.02 : 0.025,
     //------------------------------------------------
+    //------Radius-------
+    cssRadius: isSmall ? 1.4 : isMobile ? 2.7 : isTablet ? 2.6 : 2.6,
+    jsRadius: isSmall ? 1.9 : isMobile ? 3.4 : isTablet ? 3.35 : 3.35,
+    reactRadius: isSmall ? 2.1 : isMobile ? 3.4 : isTablet ? 4.1 : 4.1,
+    tailRadius: isSmall ? 2.3 : isMobile ? 3.3 : isTablet ? 4.3 : 4.3,
+    framerRadius: isSmall ? 2.3 : isMobile ? 3.3 : isTablet ? 4.2 : 4.2,
+    typeRadius: isSmall ? 2.35 : isMobile ? 3.3 : isTablet ? 4.2 : 4.2,
+    nextRadius: isSmall ? 2.2 : isMobile ? 3.1 : isTablet ? 4.2 : 4.2,
+    //------------------------------------------------
+    //------Height-------
+    cssHeight: isSmall ? -7.7 : isMobile ? -8.5 : isTablet ? -12 : -12,
+    jsHeight: isSmall ? -7 : isMobile ? -7.6 : isTablet ? -11 : -11,
+    reactHeight: isSmall ? -6.4 : isMobile ? -6.8 : isTablet ? -9 : -9,
+    tailHeight: isSmall ? -5.7 : isMobile ? -6 : isTablet ? -8 : -8,
+    framerHeight: isSmall ? -4.9 : isMobile ? -5.2 : isTablet ? -7 : -7,
+    typeHeight: isSmall ? -4.3 : isMobile ? -4.6 : isTablet ? -6 : -6,
+    nextHeight: isSmall ? -3.8 : isMobile ? -4 : isTablet ? -5 : -5,
   };
 };
 

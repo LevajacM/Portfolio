@@ -8,7 +8,7 @@ import { calculateSizes } from "../utils/list";
 import HeroCamera from "./HeroCamera";
 import Button from "./Button";
 //******************************************
-import Hero3D from "./Hero3D";
+import Bonsai from "../proba/Bonsai";
 //******************************************
 import Css3Logo from "../3dLogo/Css3Logo";
 import FramerLogo from "../3dLogo/FramerLogo";
@@ -20,26 +20,27 @@ import TypescriptLogo from "../3dLogo/TypescriptLogo";
 //******************************************
 import Asteroids from "../space/Asteroids";
 import PlanetSystem from "../space/PlanetSystem";
-import Rocket from "../space/Rocket";
-import StarGlasses from "../space/StarGlasses";
+import Moon from "./Moon";
 
-const Hero = () => {
-  const isSmall = useMediaQuery({ maxWidth: 440 });
+const Hero = ({ titleZInd }) => {
+  const isSmall = useMediaQuery({ maxWidth: 500 });
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
-
   const sizes = calculateSizes(isSmall, isMobile, isTablet);
-
-  const logoScale = 0.04;
+  const logoScale = sizes.logoScale;
+  const logoSpeed = 0.3;
+  const logoRotationSpeed = 1.3;
 
   return (
     <section id='home' className='min-h-screen w-full flex flex-col relative'>
       <div className='w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3'>
-        <p className='sm:text-2xl text-xl font-medium text-white text-center font-generalsans '>
-          Hi, I&apos;m Mihajlo, a Web Developer{" "}
-          <span className='waving-hand'>👋</span>
+        <p
+          className={`sm:text-2xl text-xl font-medium text-white text-center font-generalsans ${titleZInd}`}
+        >
+          Hi, I&apos;m Mihajlo, a Web Developer
+          {/* <span className='waving-hand'>👋</span> */}
         </p>
-        <p className='hero_tag text-gray_gradient'>
+        <p className={`hero_tag text-gray_gradient ${titleZInd}`}>
           Let&apos;s create something amazing together.
         </p>
       </div>
@@ -50,79 +51,75 @@ const Hero = () => {
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <PerspectiveCamera makeDefault position={[0, 0, 35]} />
-            <OrbitControls />
+            {/* <OrbitControls /> */}
 
             <Css3Logo
-              speed={0.5}
-              radius={2.3}
-              rotationSpeed={1.3}
-              height={-11}
-              scale={logoScale}
-            />
-            <FramerLogo
-              speed={0.5}
-              radius={6.45}
-              rotationSpeed={1.3}
-              height={-7.5}
+              speed={logoSpeed}
+              radius={sizes.cssRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.cssHeight}
               scale={logoScale}
             />
             <JSLogo
-              speed={0.5}
-              radius={3.45}
-              rotationSpeed={1.3}
-              height={-10}
-              scale={logoScale}
-            />
-            <NextjsLogo
-              speed={0.5}
-              radius={8}
-              rotationSpeed={1.3}
-              height={-5.5}
+              speed={logoSpeed}
+              radius={sizes.jsRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.jsHeight}
               scale={logoScale}
             />
             <ReactLogo
-              speed={0.5}
-              radius={4}
-              rotationSpeed={1.3}
-              height={-9}
+              speed={logoSpeed}
+              radius={sizes.reactRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.reactHeight}
               scale={logoScale}
             />
             <TailwindLogo
-              speed={0.5}
-              radius={5}
-              rotationSpeed={1.3}
-              height={-8}
+              speed={logoSpeed}
+              radius={sizes.tailRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.tailHeight}
+              scale={logoScale}
+            />
+            <FramerLogo
+              speed={logoSpeed}
+              radius={sizes.framerRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.framerHeight}
               scale={logoScale}
             />
             <TypescriptLogo
-              speed={0.5}
-              radius={7.2}
-              rotationSpeed={1.3}
-              height={-6.5}
+              speed={logoSpeed}
+              radius={sizes.typeRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.typeHeight}
               scale={logoScale}
             />
-            <HeroCamera isMobile={isMobile}>
-              <Hero3D
-                // position={sizes.deskPosition}
-                position={[0, -3, 0]}
-                // scale={sizes.deskScale}
-                scale={0.35}
-                rotation={[0, -2.2, 0]}
-              />
-            </HeroCamera>
+            <NextjsLogo
+              speed={logoSpeed}
+              radius={sizes.nextRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.nextHeight}
+              scale={logoScale}
+            />
+
+            {/* <HeroCamera isMobile={isMobile}> */}
+
+            <Bonsai
+              // position={sizes.bonsaiPosition}
+              position={sizes.bonsaiPosition}
+              // scale={sizes.bonsaiScale}
+              scale={sizes.bonsaiScale}
+              rotation={[0, 4.1, 0]}
+            />
+            {/* </HeroCamera> */}
             <group>
-              <Asteroids scale={0.5} position={sizes.reactLogoPosition} />
-              <PlanetSystem
-                scale={0.5}
-                position={sizes.mPosition}
-                rotation={[0.5, 0, 0]}
+              <Moon
+                scale={sizes.moonScale}
+                position={sizes.moonPosition}
+                rotation={[0, 0, 0]}
               />
-              <group scale={0.65} position={sizes.htmlPosition}>
-                <Rocket scale={0.25} position={sizes.htmlPosition} />
-                <StarGlasses scale={1.7} position={[-12, 1.7, 0]} />
-                <StarGlasses scale={1.7} position={[-11.5, 2.5, 0]} />
-                <StarGlasses scale={1.7} position={[-10, 1.7, 0]} />
-              </group>
+              <directionalLight position={[20, -15, 0]} intensity={0.2} />
             </group>
 
             <ambientLight intensity={1} />

@@ -8,37 +8,55 @@ const Css3LogoA = (props) => {
 
   const [startTime, setStartTime] = useState(Date.now());
   const [rotationSpeed, setRotationSpeed] = useState(1);
-  const [phase, setPhase] = useState("accelerating"); // Da bismo pratili faze (brzo, sporo)
+  const [phase, setPhase] = useState("accelerating");
+  const [isRotating, setIsRotating] = useState(false);
+  // const [hasRotatedOnce, setHasRotatedOnce] = useState(false);
+
+  const handlePointerOver = () => {
+    setIsRotating(true); // Pokreni rotaciju kad korisnik pređe preko modela
+    setStartTime(Date.now());
+    setPhase("accelerating");
+  };
+
+  // const handlePointerOut = () => {
+  //   setIsRotating(false); // Zaustavi rotaciju
+  //   groupRef.current.rotation.y = initialRotation.current; // Vratite model u početni položaj
+  // };
 
   useFrame(() => {
-    const elapsedTime = (Date.now() - startTime) / 1000;
+    if (!isRotating) return;
 
+    const elapsedTime = (Date.now() - startTime) / 1000;
     let currentRotationSpeed = rotationSpeed;
 
-    // Brza rotacija traje 3 sekunde
     if (phase === "accelerating") {
-      currentRotationSpeed = Math.min(rotationSpeed + elapsedTime * 0.5, 1); // Ubrzaj rotaciju
+      currentRotationSpeed = Math.min(rotationSpeed + elapsedTime * 0.5, 1);
       if (elapsedTime > 1.5) {
-        setPhase("slowing"); // Pređi na fazu usporavanja
-        setStartTime(Date.now()); // Resetuj vreme za novu fazu
+        setPhase("slowing");
+        setStartTime(Date.now());
       }
     }
 
-    // Spora rotacija traje 4 sekunde
     if (phase === "slowing") {
-      currentRotationSpeed = Math.max(rotationSpeed - elapsedTime * 0.1, 0.001); // Sporo smanjuj brzinu
+      currentRotationSpeed = Math.max(rotationSpeed - elapsedTime * 0.1, 0.001);
       if (elapsedTime > 10) {
-        setPhase("accelerating"); // Pređi na fazu ubrzanja
-        setStartTime(Date.now()); // Resetuj vreme za novu fazu
+        // setPhase("accelerating");
+        // setStartTime(Date.now());
+        setIsRotating(false);
       }
     }
 
-    // Rotiraj objekat oko Y ose koristeći trenutnu brzinu
     groupRef.current.rotation.y += currentRotationSpeed * Math.PI * 0.1;
   });
 
   return (
-    <group ref={groupRef} {...props} dispose={null}>
+    <group
+      ref={groupRef}
+      {...props}
+      dispose={null}
+      onPointerOver={handlePointerOver}
+      // onPointerOut={handlePointerOut}
+    >
       <mesh
         castShadow
         receiveShadow

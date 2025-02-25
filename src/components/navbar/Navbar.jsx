@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import NavItems from "./NavItems";
 import Sidebar from "./Sidebar";
@@ -8,8 +8,11 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import Robotic from "../proba/Robotic";
+import CanvasLoader from "../hero/CanvasLoader";
 
-const Navbar = () => {
+const Navbar = ({ setTitleZInd }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [visible, setVisible] = useState(true);
@@ -17,6 +20,11 @@ const Navbar = () => {
 
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
+    if (isOpen) {
+      setTitleZInd("z-50");
+    } else {
+      setTitleZInd("z-10");
+    }
   };
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
@@ -55,7 +63,17 @@ const Navbar = () => {
                 href='/'
                 className='text-neutral-400 font-bold text-xl hover:text-white transition-colors'
               >
-                weawegw
+                <div className='h-[41px] w-[33px]'>
+                  <Canvas scale={5}>
+                    <directionalLight position={[10, 10, 10]} />
+                    <Robotic
+                      scale={2.9}
+                      position={[0, -3.1, 0]}
+                      rotation={[0, -1.2, 0]}
+                    />
+                    <Suspense fallback={<CanvasLoader />}></Suspense>
+                  </Canvas>
+                </div>
               </a>
               <button
                 onClick={toggleOpen}

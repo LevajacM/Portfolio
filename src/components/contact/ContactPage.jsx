@@ -1,7 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 import emails from "@emailjs/browser";
 import Button from "../hero/Button";
 import { RingLoader, CircleLoader } from "react-spinners";
+import { Canvas } from "@react-three/fiber";
+import CanvasLoader from "../hero/CanvasLoader";
+import LittleRobot from "../proba/LittleRobot";
+import WalkingRobot from "./WalkingRobot";
 
 const ContactPage = () => {
   const formRef = useRef();
@@ -50,7 +54,7 @@ const ContactPage = () => {
 
   return (
     <section id='contact' className='c-space my-20'>
-      <div className='min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300'>
+      <div className='min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300 relative'>
         <div className='contact-container'>
           <h3 className='head-text'>Contact Me</h3>
           <p className='text-lg text-white-600 mt-12'>
@@ -130,6 +134,30 @@ const ContactPage = () => {
               )}
             </button>
           </form>
+        </div>
+        <div className='absolute w-100px h-fit lg:w-150px bottom-20 right-4'>
+          <Canvas>
+            <directionalLight position={[15, -5, 40]} />
+            <ambientLight intensity={3} />
+            <pointLight position={[-10, -5, 20]} intensity={0.8} />
+            <Suspense fallback={<CanvasLoader />}>
+              <LittleRobot scale={2} position={[0, -3, 0]} />
+            </Suspense>
+          </Canvas>
+        </div>
+        <div className='absolute w-100px h-fit lg:w-150px bottom-20 left-4'>
+          <Canvas>
+            <directionalLight position={[25, -10, 40]} />
+            <ambientLight intensity={1.8} />
+            <pointLight position={[-10, 15, 20]} intensity={0.8} />
+            <Suspense fallback={<CanvasLoader />}>
+              <WalkingRobot
+                scale={2.3}
+                position={[0, -2.3, 0]}
+                rotation={[0, -0.37, 0]}
+              />
+            </Suspense>
+          </Canvas>
         </div>
       </div>
     </section>

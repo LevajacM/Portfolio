@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Hero from "./components/hero/Hero";
 import AboutSection from "./components/about/AboutSection";
@@ -7,10 +8,12 @@ import Footer from "./components/footer/Footer";
 import Approach from "./components/approach/Approach";
 
 const App = () => {
+  const [titleZInd, setTitleZInd] = useState("z-50");
+
   return (
     <main className='max-w-7xl mx-auto'>
-      <Navbar />
-      <Hero />
+      <Navbar setTitleZInd={setTitleZInd} />
+      <Hero titleZInd={titleZInd} />
       <AboutSection />
       <Projects />
       <Approach />
