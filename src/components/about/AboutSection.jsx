@@ -19,26 +19,20 @@ import NextjsLogoA from "../3dLogoAbout/NextjsLogoA";
 import ReactLogoA from "../3dLogoAbout/ReactLogoA";
 import TailwindLogoA from "../3dLogoAbout/TailwindLogoA";
 import TypescriptLogoA from "../3dLogoAbout/TypescriptLogoA";
-import Technotron from "./Technotron";
 //******************************************
-import Car from "../proba/Car";
-import Coral from "../proba/Coral";
-import Turret from "../proba/Turret";
+import Technotron from "./Technotron";
+import Car from "./Car";
+import Turret from "./Turret";
 //******************************************
 
 const SceneOne = () => {
   const logoScale = 0.04;
-
   return (
     <Suspense fallback={<CanvasLoader />}>
       <ambientLight intensity={1.5} />
       <directionalLight position={[10, 10, 35]} />
       <Center>
-        <group
-          // scale={1}
-          position={[0, 0, 0]}
-          // rotation={[-0.7, -0.3, 0.4]}
-        >
+        <group position={[0, 0, 0]}>
           <Css3LogoA scale={logoScale} position={[0, 2.5, 0]} />
           <FramerLogoA scale={logoScale} position={[2.5, -1.25, 0]} />
           <JSLogoA scale={logoScale} position={[-2.5, 1.25, 0]} />
@@ -53,24 +47,13 @@ const SceneOne = () => {
 };
 
 const SceneTwo = () => {
-  // const { camera } = useThree();
-  // camera.position.set(0, 0, 12); //SpaceTravel
-
   return (
     <Suspense fallback={<CanvasLoader />}>
       <ambientLight intensity={2} />
       <directionalLight position={[10, 10, 15]} />
-      <Center position={[0, -0.4, 0]} scale={2.1}>
+      <Center position={[0, -0.4, 0]} scale={1.4}>
         <Technotron />
       </Center>
-      {/* <Center> */}
-      {/* <group scale={2.9} position={[0, -0.8, 0]} rotation={[0, 1.4, 0]}>
-          <Coral />
-        </group> */}
-      {/* <group scale={0.015} position={[0.5, 1, -11.5]} rotation={[0, 0, 0]}>
-          <SpaceTravel />
-        </group> */}
-      {/* </Center> */}
     </Suspense>
   );
 };
@@ -81,7 +64,6 @@ const Scene3 = () => {
       <ambientLight intensity={1} />
       <directionalLight position={[10, 10, 5]} />
       <OrbitControls />
-
       <Center position={[0, 0, 0]}>
         <group scale={1.2} position={[0, 0, 0]} rotation={[0, 4, 0]}>
           <Car />
@@ -90,6 +72,19 @@ const Scene3 = () => {
     </Suspense>
   );
 };
+
+const Scene4 = () => {
+  return (
+    <Suspense fallback={<CanvasLoader />}>
+      <ambientLight intensity={2.5} />
+      <directionalLight position={[-10, 10, 5]} />
+      <Center position={[0, -1.3, 0]}>
+        <Turret scale={0.0088} rotation={[0, 0, 0]} />
+      </Center>
+    </Suspense>
+  );
+};
+
 //******************************************
 const AboutSection = () => {
   const [copyText, setCopyText] = useState(false);
@@ -316,26 +311,13 @@ const AboutSection = () => {
             >
               <div className='grid-container lg:h-[270px] !pt-0 !gap-2'>
                 <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
-                  <Suspense fallback={<CanvasLoader />}>
-                    <ambientLight intensity={2.5} />
-                    <directionalLight position={[-10, 10, 5]} />
-                    <Center>
-                      {/* <Arrow scale={2.5} position={[1.3, -1.9, 0]} /> */}
-                      <group
-                        scale={0.009}
-                        position={[0, -5.75, 0]}
-                        rotation={[0, 0, 0]}
-                      >
-                        <Turret />
-                      </group>
-                    </Center>
-                  </Suspense>
+                  <Scene4 />
                 </Canvas>
 
                 <div className='space-y-2'>
                   <div className='copy-container' onClick={handleCopy}>
                     {copyText ? (
-                      <span className='inline grid-headtext mt-2'>
+                      <span className='inline grid-headtext mt-10'>
                         Email copied successfully{"  "}
                         <GiCheckMark className='inline text-green-400 ' />
                       </span>
@@ -343,7 +325,7 @@ const AboutSection = () => {
                       <Button
                         name='Copy my email'
                         isBeam
-                        containerClass='mt-2 grid-headtext'
+                        containerClass='mt-4 grid-headtext'
                       >
                         <IoCopy />
                       </Button>
@@ -427,27 +409,14 @@ const AboutSection = () => {
             </div>
           </div>
           <div className='xl:col-span-1 xl:row-span-2 '>
-            <div className='grid-container'>
+            <div className='grid-container sm:h-[350px]'>
               <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
-                <Suspense fallback={<CanvasLoader />}>
-                  <ambientLight intensity={2.5} />
-                  <directionalLight position={[-10, 10, 5]} />
-                  <Center>
-                    {/* <Arrow scale={2.5} position={[1.3, -2.4, 0]} /> */}
-                    <group
-                      scale={0.009}
-                      position={[0, -4.5, 0]}
-                      rotation={[0, 0, 0]}
-                    >
-                      <Turret />
-                    </group>
-                  </Center>
-                </Suspense>
+                <Scene4 />
               </Canvas>
               <div className='space-y-2'>
                 <div className='copy-container' onClick={handleCopy}>
                   {copyText ? (
-                    <span className='inline grid-headtext mt-16'>
+                    <span className='inline grid-headtext mt-12'>
                       Email copied successfully{"  "}
                       <GiCheckMark className='inline text-green-400 ' />
                     </span>
@@ -455,7 +424,7 @@ const AboutSection = () => {
                     <Button
                       name='Copy my email'
                       isBeam
-                      containerClass='mt-10 grid-headtext'
+                      containerClass='mt-6 grid-headtext'
                     >
                       <IoCopy />
                     </Button>

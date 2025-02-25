@@ -10,7 +10,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 const Moon = (props) => {
-  const { nodes, materials } = useGLTF("/models/moon.glb");
+  const { nodes, materials } = useGLTF("/models/heroModels/moon.glb");
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -26,6 +26,6 @@ const Moon = (props) => {
   );
 };
 
-useGLTF.preload("/models/moon.glb");
+useGLTF.preload("/models/heroModels/moon.glb");
 
 export default Moon;

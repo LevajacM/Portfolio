@@ -11,7 +11,9 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 
 const Technotron = (props) => {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/models/robot.glb");
+  const { nodes, materials, animations } = useGLTF(
+    "/models/aboutModels/robot.glb"
+  );
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
@@ -1067,6 +1069,6 @@ const Technotron = (props) => {
   );
 };
 
-useGLTF.preload("/models/robot.glb");
+useGLTF.preload("/models/aboutModels/robot.glb");
 
 export default Technotron;

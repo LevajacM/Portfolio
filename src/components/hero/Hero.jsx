@@ -4,11 +4,12 @@ import { Suspense } from "react";
 import CanvasLoader from "./CanvasLoader";
 // import { Leva, useControls } from "leva";
 import { useMediaQuery } from "react-responsive";
-import { calculateSizes } from "../utils/list";
+import { calculateSizesHero } from "../utils/list";
 import HeroCamera from "./HeroCamera";
 import Button from "./Button";
 //******************************************
-import Bonsai from "../proba/Bonsai";
+import Bonsai from "./Bonsai";
+import Moon from "./Moon";
 //******************************************
 import Css3Logo from "../3dLogo/Css3Logo";
 import FramerLogo from "../3dLogo/FramerLogo";
@@ -20,13 +21,12 @@ import TypescriptLogo from "../3dLogo/TypescriptLogo";
 //******************************************
 import Asteroids from "../space/Asteroids";
 import PlanetSystem from "../space/PlanetSystem";
-import Moon from "./Moon";
 
 const Hero = ({ titleZInd }) => {
   const isSmall = useMediaQuery({ maxWidth: 500 });
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
-  const sizes = calculateSizes(isSmall, isMobile, isTablet);
+  const sizes = calculateSizesHero(isSmall, isMobile, isTablet);
   const logoScale = sizes.logoScale;
   const logoSpeed = 0.3;
   const logoRotationSpeed = 1.3;
@@ -52,67 +52,63 @@ const Hero = ({ titleZInd }) => {
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <PerspectiveCamera makeDefault position={[0, 0, 35]} />
             {/* <OrbitControls /> */}
+            <HeroCamera isMobile={isMobile}>
+              <Css3Logo
+                speed={logoSpeed}
+                radius={sizes.cssRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.cssHeight}
+                scale={logoScale}
+              />
+              <JSLogo
+                speed={logoSpeed}
+                radius={sizes.jsRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.jsHeight}
+                scale={logoScale}
+              />
+              <ReactLogo
+                speed={logoSpeed}
+                radius={sizes.reactRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.reactHeight}
+                scale={logoScale}
+              />
+              <TailwindLogo
+                speed={logoSpeed}
+                radius={sizes.tailRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.tailHeight}
+                scale={logoScale}
+              />
+              <FramerLogo
+                speed={logoSpeed}
+                radius={sizes.framerRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.framerHeight}
+                scale={logoScale}
+              />
+              <TypescriptLogo
+                speed={logoSpeed}
+                radius={sizes.typeRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.typeHeight}
+                scale={logoScale}
+              />
+              <NextjsLogo
+                speed={logoSpeed}
+                radius={sizes.nextRadius}
+                rotationSpeed={logoRotationSpeed}
+                height={sizes.nextHeight}
+                scale={logoScale}
+              />
 
-            <Css3Logo
-              speed={logoSpeed}
-              radius={sizes.cssRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.cssHeight}
-              scale={logoScale}
-            />
-            <JSLogo
-              speed={logoSpeed}
-              radius={sizes.jsRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.jsHeight}
-              scale={logoScale}
-            />
-            <ReactLogo
-              speed={logoSpeed}
-              radius={sizes.reactRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.reactHeight}
-              scale={logoScale}
-            />
-            <TailwindLogo
-              speed={logoSpeed}
-              radius={sizes.tailRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.tailHeight}
-              scale={logoScale}
-            />
-            <FramerLogo
-              speed={logoSpeed}
-              radius={sizes.framerRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.framerHeight}
-              scale={logoScale}
-            />
-            <TypescriptLogo
-              speed={logoSpeed}
-              radius={sizes.typeRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.typeHeight}
-              scale={logoScale}
-            />
-            <NextjsLogo
-              speed={logoSpeed}
-              radius={sizes.nextRadius}
-              rotationSpeed={logoRotationSpeed}
-              height={sizes.nextHeight}
-              scale={logoScale}
-            />
-
-            {/* <HeroCamera isMobile={isMobile}> */}
-
-            <Bonsai
-              // position={sizes.bonsaiPosition}
-              position={sizes.bonsaiPosition}
-              // scale={sizes.bonsaiScale}
-              scale={sizes.bonsaiScale}
-              rotation={[0, 4.1, 0]}
-            />
-            {/* </HeroCamera> */}
+              <Bonsai
+                position={sizes.bonsaiPosition}
+                scale={sizes.bonsaiScale}
+                rotation={[0, 4.1, 0]}
+              />
+            </HeroCamera>
             <group>
               <Moon
                 scale={sizes.moonScale}

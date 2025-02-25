@@ -15,7 +15,7 @@ const LaptopCyber = (props) => {
   const group = useRef();
 
   const { nodes, materials } = useGLTF(
-    "/models/cyberpunk_laptop_concept_design.glb"
+    "/models/projectsModels/cyber-laptop.glb"
   );
 
   const txt = useVideoTexture(
@@ -260,6 +260,6 @@ const LaptopCyber = (props) => {
   );
 };
 
-useGLTF.preload("/models/cyberpunk_laptop_concept_design.glb");
+useGLTF.preload("/models/projectsModels/cyber-laptop.glb");
 
 export default LaptopCyber;

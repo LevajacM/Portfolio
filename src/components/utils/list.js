@@ -6,7 +6,7 @@ export const navLinks = [
   { id: 5, name: "contact", link: "#contact" },
 ];
 
-export const calculateSizes = (isSmall, isMobile, isTablet) => {
+export const calculateSizesHero = (isSmall, isMobile, isTablet) => {
   return {
     //------------------------------------------------
     bonsaiScale: isSmall ? 0.039 : isMobile ? 0.05 : 0.07,

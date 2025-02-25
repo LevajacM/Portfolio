@@ -12,7 +12,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 const WalkingRobot = (props) => {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(
-    "/models/proba/walking-robot.glb"
+    "/models/contactModels/walking-robot.glb"
   );
   const { actions } = useAnimations(animations, group);
 
@@ -50,6 +50,6 @@ const WalkingRobot = (props) => {
   );
 };
 
-useGLTF.preload("/models/proba/walking-robot.glb");
+useGLTF.preload("/models/contactModels/walking-robot.glb");
 
 export default WalkingRobot;

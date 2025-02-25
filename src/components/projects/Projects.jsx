@@ -76,11 +76,11 @@ const Projects = () => {
   };
 
   return (
-    <section id='projects' className='c-space my-20'>
-      <p className='head-text'>My Work</p>
+    <section id='projects' className='c-space  mb-44'>
+      <p className='head-text pt-8'>My Work</p>
       {!isMobile ? (
         <AnimatePresence mode='wait'>
-          <div className='grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full'>
+          <div className='grid lg:grid-cols-2 grid-cols-1 mt-32 gap-5 w-full'>
             <motion.div
               initial={{
                 opacity: 0,
@@ -181,13 +181,9 @@ const Projects = () => {
               <Canvas>
                 <ambientLight intensity={Math.PI} />
                 <directionalLight position={[10, 10, 5]} />
-                <Center>
+                <Center position={[0, 0, -2.5]}>
                   <Suspense fallback={<CanvasLoader />}>
-                    <group
-                      scale={0.03}
-                      position={[0, 0, -2.5]}
-                      rotation={[0.2, 0, 0]}
-                    >
+                    <group scale={0.03} rotation={[0.2, 0, 0]}>
                       <LaptopCyber texture={currentProject.texture} />
                     </group>
                   </Suspense>
@@ -273,13 +269,9 @@ const Projects = () => {
             <Canvas>
               <ambientLight intensity={Math.PI} />
               <directionalLight position={[10, 10, 5]} />
-              <Center>
+              <Center position={[0, 1.11, -2.5]}>
                 <Suspense fallback={<CanvasLoader />}>
-                  <group
-                    scale={0.03}
-                    position={[0, 0, -2.5]}
-                    rotation={[0.2, 0, 0]}
-                  >
+                  <group scale={0.03} rotation={[0.2, 0, 0]}>
                     <LaptopCyber texture={currentProject.texture} />
                   </group>
                 </Suspense>

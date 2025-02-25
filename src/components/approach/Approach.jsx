@@ -83,8 +83,8 @@ const Approach = () => {
   return (
     <section id='approach' className='c-space my-20'>
       <div className='w-full text-white-600'>
-        <h3 className='head-text'>My Approach</h3>
-        <div className='work-container'>
+        <h3 className='head-text pt-8'>My Approach</h3>
+        <div className='work-container '>
           <div className='work-canvas'>
             <Canvas
               gl={{ antialias: false }}
