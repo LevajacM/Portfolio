@@ -50,20 +50,16 @@ const ContactPage = () => {
   };
 
   return (
-    <section id='contact' className='c-space my-20'>
-      <div className='min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300 '>
+    <section id='contact' className='c-space my-6 sm:my-20'>
+      <div className='h-[90vh] sm:min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300 '>
         <div className='contact-container relative'>
-          {/* <TextGenerateEffect
-            words='Contact Me'
-            className='head-text text-center'
-          /> */}
           <Naslov
             text='Contact Me'
             className='head-text text-center'
             duration={1.5}
           />
 
-          <p className='text-lg text-white-600 mt-12'>
+          <p className='text-lg text-white-600 mt-6 sm:mt-12'>
             If you would like to get in touch, feel free to send a message.
             Whether it is a question, a project idea, or just a quick hello, I
             would be happy to hear from you.
@@ -71,9 +67,9 @@ const ContactPage = () => {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className='mt-12 flex flex-col space-y-7'
+            className='mt-6 sm:mt-12 flex flex-col space-y-3 sm:space-y-7'
           >
-            <label className='space-y-3'>
+            <label className='space-y-1 sm:space-y-3'>
               <span className='field-label'>Full Name</span>
               <input
                 type='text'
@@ -84,7 +80,7 @@ const ContactPage = () => {
                 onChange={handleChange}
               />
             </label>
-            <label className='space-y-3'>
+            <label className='space-y-1 sm:space-y-3'>
               <span className='field-label'>Email</span>
               <input
                 type='email'
@@ -95,7 +91,7 @@ const ContactPage = () => {
                 onChange={handleChange}
               />
             </label>
-            <label className='space-y-3'>
+            <label className='space-y-1 sm:space-y-3'>
               <span className='field-label'>Message</span>
               <textarea
                 rows={5}

@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { calculateSizesHero } from "../utils/list";
 import Button from "./Button";
 import Naslov from "../naslov/Naslov";
+import { useWindowWidth } from "../utils/useWindowWidth";
 //******************************************
 import Bonsai from "./Bonsai";
 import Moon from "./Moon";
@@ -43,9 +44,15 @@ const Hero = ({ titleZInd }) => {
   const logoScale = sizes.logoScale;
   const logoSpeed = 0.3;
   const logoRotationSpeed = 1.3;
+  const width = useWindowWidth();
+  const calcInset = (width - 1280) / 2;
 
   return (
-    <section id='home' className='min-h-screen w-full flex flex-col relative'>
+    <section
+      id='home'
+      className={`min-h-screen w-full   flex flex-col relative 2xl:w-[1530px] 2xl:-inset-x-[125px] 
+      3xl:w-[1630px] 3xl:-inset-x-[175px] 4xl:w-[1730px] 4xl:-inset-x-[225px] 5xl:w-[1830px] 5xl:-inset-x-[275px]`}
+    >
       <div
         className={`w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3 ${titleZInd}`}
       >
@@ -64,11 +71,15 @@ const Hero = ({ titleZInd }) => {
       </div>
       <div className='w-full h-full absolute inset-0'>
         {/* <Leva /> */}
-        <Canvas className='w-full h-full'>
+        <Canvas className='w-full h-full overflow-visible'>
           <Suspense fallback={<CanvasLoader />}>
-            <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <PerspectiveCamera makeDefault position={[0, 0, 35]} />
+            <perspectiveCamera makeDefault position={[10, 5, -20]} />
+
+            <AutoRotatingCamera />
+            <ambientLight intensity={1} />
+            <directionalLight position={[-50, -20, 40]} intentsity={1} />
 
             <Css3Logo
               speed={logoSpeed}
@@ -125,9 +136,7 @@ const Hero = ({ titleZInd }) => {
               scale={sizes.bonsaiScale}
               rotation={[0, 4.1, 0]}
             />
-            <perspectiveCamera makeDefault position={[10, 5, -20]} />
 
-            <AutoRotatingCamera />
             <group>
               <Moon
                 scale={sizes.moonScale}
@@ -136,13 +145,10 @@ const Hero = ({ titleZInd }) => {
               />
               <directionalLight position={[20, -15, 0]} intensity={0.2} />
             </group>
-
-            <ambientLight intensity={1} />
-            <directionalLight position={[-50, -20, 40]} intentsity={1} />
           </Suspense>
         </Canvas>
       </div>
-      <div className='absolute bottom-7 left-0 right-0 z-10 c-space'>
+      <div className='absolute bottom-16 sm:bottom-7 left-0 right-0 z-10 c-space'>
         <a href='#about' className='w-fit'>
           <Button
             name='Get in touch'

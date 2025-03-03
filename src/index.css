@@ -101,7 +101,7 @@ body {
 
   /*  work experience section */
   .work-container {
-    @apply grid  grid-cols-1 gap-y-5 lg:gap-5 mt-28 mb-40 lg:grid-cols-5;
+    @apply grid  grid-cols-1 gap-y-5 lg:gap-5 mt-8 sm:mt-28 mb-40 lg:grid-cols-5;
   }
 
   .work-canvas {

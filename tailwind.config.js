@@ -26,6 +26,11 @@ export default {
       backgroundImage: {
         terminal: "url('/assets/terminal.png')",
       },
+      screens: {
+        "3xl": "1630px",
+        "4xl": "1730px",
+        "5xl": "1830px",
+      },
     },
   },
   plugins: [],

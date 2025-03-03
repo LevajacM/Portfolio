@@ -65,7 +65,7 @@ const Approach = () => {
 
         <div className='work-container '>
           <div className='work-content'>
-            <div className='sm:py-10 py-[10px] sm:px-5 px-2.5 '>
+            <div className='py-[10px] sm:py-10  sm:px-5 px-2.5 '>
               {!isMobile ? (
                 <AnimatePresence mode='sync'>
                   {approachList.map((item, ind) => {

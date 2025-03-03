@@ -11,7 +11,7 @@ const App = () => {
   const [titleZInd, setTitleZInd] = useState("z-50");
 
   return (
-    <main className='max-w-7xl mx-auto'>
+    <main className='max-w-7xl mx-auto xl:overflow-visible'>
       <Navbar setTitleZInd={setTitleZInd} />
       <Hero titleZInd={titleZInd} />
       <AboutSection />

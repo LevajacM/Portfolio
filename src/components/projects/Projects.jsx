@@ -189,7 +189,7 @@ const Projects = () => {
         </AnimatePresence>
       ) : (
         <div className='grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full'>
-          <div className='flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200'>
+          <div className='flex flex-col gap-5 relative sm:p-10 py-2 sm:py-10 px-5 shadow-2xl shadow-black-200'>
             <div
               className='p-2 backdrop-blur-3xl backdrop-filter w-fit rounded-lg'
               style={currentProject.logoStyle}
