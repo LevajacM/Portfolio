@@ -14,10 +14,10 @@ export const calculateSizesHero = (isSmall, isMobile, isTablet) => {
     //---------------------------------
     moonScale: isSmall ? 0.9 : isMobile ? 1.1 : 1.3,
     moonPosition: isSmall
-      ? [0, 9, -10]
+      ? [0, 8, -20]
       : isMobile
-        ? [0.6, 9, -10]
-        : [0, 9, -10],
+        ? [0.6, 8, -20]
+        : [0, 8, -20],
     //--------------------------------
     logoScale: isSmall ? 0.015 : isMobile ? 0.02 : 0.025,
     //------------------------------------------------
@@ -43,19 +43,18 @@ export const calculateSizesHero = (isSmall, isMobile, isTablet) => {
 
 export const recentProjects = [
   {
-    title: "Lorem ipsum - dolor sit amet.",
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis molestias aliquid ut minima incidunt illo beatae maxime ipsa consequatur cum atque tempora accusantium nesciunt vitae dolorum nisi earum officiis, quo totam quisquam non quae distinctio? Totam laborum sapiente corrupti quae.",
+    title: "Mr Pačalinković 🥞",
+    desc: "This website for a local pancake fast food joint is built using Next.js 15 and React 19, with Tailwind CSS handling the styling. I've added some cool 3D models using React Three Fiber and React 3 Drei, and the animations are powered by Framer Motion. The site is super fast, super smooth, and just works without a hitch.",
     subdesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dolorem recusandae rerum dignissimos natus deserunt suscipit, animi modi dolore nisi, minus amet sunt quasi ratione qui perspiciatis! Enim, quasi obcaecati!",
-    href: "#",
-    texture: "/textures/coa-video.mp4",
+      "The idea behind the site is simple: let people check out the menu and get in touch easily. It's not for online orders — specialized delivery services handle that part. It's more about giving the brand a modern, tech-savvy look while making it easy for customers to connect. Perfect for a small business that wants to stand out!",
+    href: "https://www.mrpacalinkovic.com",
+    texture: "/textures/mr-pacalinkovic-360p.mp4",
     logo: "/photos/project-logo1.png",
     logoStyle: {
       backgroundColor: "#2A1816",
       border: "0.2px solid #36201D",
       boxShadow: "0px 0px 60px 0px #AA3C304D",
     },
-    spotlight: "/photos/spotlight1.png",
     tags: [
       {
         id: 1,
@@ -71,43 +70,11 @@ export const recentProjects = [
         id: 3,
         name: "Next.js",
         path: "/photos/nextjs.png",
-      },
-    ],
-  },
-  {
-    title: "2Lorem ipsum - dolor sit amet.",
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis molestias aliquid ut minima incidunt illo beatae maxime ipsa consequatur cum atque tempora accusantium nesciunt vitae dolorum nisi earum officiis, quo totam quisquam non quae distinctio? Totam laborum sapiente corrupti quae.",
-    subdesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam dolorem recusandae rerum dignissimos natus deserunt suscipit, animi modi dolore nisi, minus amet sunt quasi ratione qui perspiciatis! Enim, quasi obcaecati!",
-    href: "#",
-    texture: "/textures/1.mp4",
-    logo: "/photos/project-logo2.png",
-    logoStyle: {
-      backgroundColor: "#13202F",
-      border: "0.2px solid #17293E",
-      boxShadow: "0px 0px 60px 0px #2F6DB54D",
-    },
-    spotlight: "/photos/spotlight2.png",
-    tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/photos/react.svg",
-      },
-      {
-        id: 2,
-        name: "TailwindCSS",
-        path: "/photos/tailwindcss.png",
-      },
-      {
-        id: 3,
-        name: "TypeScript",
-        path: "/photos/typescript.png",
       },
       {
         id: 4,
-        name: "Next.js",
-        path: "/photos/nextjs.png",
+        name: "Framer Motion",
+        path: "/photos/framer.svg",
       },
     ],
   },

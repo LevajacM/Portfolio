@@ -6,7 +6,7 @@ Source: https://sketchfab.com/3d-models/cyberpunk-laptop-concept-design-fddc4e68
 Title: CyberPunk Laptop Concept Design
 */
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useGLTF, useVideoTexture } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -19,14 +19,8 @@ const LaptopCyber = (props) => {
   );
 
   const txt = useVideoTexture(
-    props.texture ? props.texture : "/textures/coa-video.mp4"
+    props.texture ? props.texture : "/textures/mr-pacalinkovic-360p.mp4"
   );
-
-  useEffect(() => {
-    if (txt) {
-      txt.rotate = Math.PI / 2;
-    }
-  }, [txt]);
 
   useGSAP(() => {
     gsap.from(group.current.rotation, {

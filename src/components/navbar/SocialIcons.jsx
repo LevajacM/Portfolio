@@ -9,7 +9,7 @@ const SocialIcons = () => {
       icon: <VscGithub />,
     },
     {
-      href: "https:LINK ZA UPWORK!!!!!!!/",
+      href: "https://www.upwork.com/freelancers/~01092937d621a41c91?mp_source=share",
       icon: <FaSquareUpwork />,
     },
     {

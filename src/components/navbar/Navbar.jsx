@@ -65,13 +65,14 @@ const Navbar = ({ setTitleZInd }) => {
               >
                 <div className='h-[41px] w-[33px]'>
                   <Canvas scale={5}>
-                    <directionalLight position={[10, 10, 10]} />
-                    <Robotic
-                      scale={2.9}
-                      position={[0, -3.1, 0]}
-                      rotation={[0, -1.2, 0]}
-                    />
-                    <Suspense fallback={<CanvasLoader />}></Suspense>
+                    <Suspense fallback={<CanvasLoader />}>
+                      <directionalLight position={[10, 10, 10]} />
+                      <Robotic
+                        scale={2.9}
+                        position={[0, -3.1, 0]}
+                        rotation={[0, -1.2, 0]}
+                      />
+                    </Suspense>
                   </Canvas>
                 </div>
               </a>

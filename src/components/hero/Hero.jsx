@@ -1,12 +1,12 @@
-import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
+import { PerspectiveCamera } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Vector3 } from "three";
 import CanvasLoader from "./CanvasLoader";
-// import { Leva, useControls } from "leva";
 import { useMediaQuery } from "react-responsive";
 import { calculateSizesHero } from "../utils/list";
-import HeroCamera from "./HeroCamera";
 import Button from "./Button";
+import Naslov from "../naslov/Naslov";
 //******************************************
 import Bonsai from "./Bonsai";
 import Moon from "./Moon";
@@ -18,9 +18,22 @@ import NextjsLogo from "../3dLogo/NextjsLogo";
 import ReactLogo from "../3dLogo/ReactLogo";
 import TailwindLogo from "../3dLogo/TailwindLogo";
 import TypescriptLogo from "../3dLogo/TypescriptLogo";
-//******************************************
-import Asteroids from "../space/Asteroids";
-import PlanetSystem from "../space/PlanetSystem";
+
+const AutoRotatingCamera = () => {
+  const { camera } = useThree();
+  const speed = 0.00005;
+  useFrame(() => {
+    const angle = speed * performance.now(); // Brzina rotacije u zavisnosti od vremena
+
+    // pozicija kamere
+    camera.position.x = Math.cos(angle) * 24;
+    camera.position.z = Math.sin(angle) * 24;
+    camera.position.y = 2.5; // Visina
+    camera.lookAt(new Vector3(-2, 0, 0)); // Kamera uvek gleda prema centru scene
+  });
+
+  return null;
+};
 
 const Hero = ({ titleZInd }) => {
   const isSmall = useMediaQuery({ maxWidth: 500 });
@@ -33,16 +46,21 @@ const Hero = ({ titleZInd }) => {
 
   return (
     <section id='home' className='min-h-screen w-full flex flex-col relative'>
-      <div className='w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3'>
-        <p
+      <div
+        className={`w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3 ${titleZInd}`}
+      >
+        <Naslov
+          text="Hi, I'm Mihajlo, a Web Developer"
           className={`sm:text-2xl text-xl font-medium text-white text-center font-generalsans ${titleZInd}`}
-        >
-          Hi, I&apos;m Mihajlo, a Web Developer
-          {/* <span className='waving-hand'>👋</span> */}
-        </p>
-        <p className={`hero_tag text-gray_gradient ${titleZInd}`}>
-          Let&apos;s create something amazing together.
-        </p>
+          duration={1}
+          textCol='text-white'
+        />
+
+        <Naslov
+          text="Let's create something amazing together."
+          className={`hero_tag text-gray_gradient ${titleZInd}`}
+          duration={1}
+        />
       </div>
       <div className='w-full h-full absolute inset-0'>
         {/* <Leva /> */}
@@ -51,64 +69,65 @@ const Hero = ({ titleZInd }) => {
             <ambientLight intensity={0.5} />
             <pointLight position={[10, 10, 10]} intensity={0.8} />
             <PerspectiveCamera makeDefault position={[0, 0, 35]} />
-            {/* <OrbitControls /> */}
-            <HeroCamera isMobile={isMobile}>
-              <Css3Logo
-                speed={logoSpeed}
-                radius={sizes.cssRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.cssHeight}
-                scale={logoScale}
-              />
-              <JSLogo
-                speed={logoSpeed}
-                radius={sizes.jsRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.jsHeight}
-                scale={logoScale}
-              />
-              <ReactLogo
-                speed={logoSpeed}
-                radius={sizes.reactRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.reactHeight}
-                scale={logoScale}
-              />
-              <TailwindLogo
-                speed={logoSpeed}
-                radius={sizes.tailRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.tailHeight}
-                scale={logoScale}
-              />
-              <FramerLogo
-                speed={logoSpeed}
-                radius={sizes.framerRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.framerHeight}
-                scale={logoScale}
-              />
-              <TypescriptLogo
-                speed={logoSpeed}
-                radius={sizes.typeRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.typeHeight}
-                scale={logoScale}
-              />
-              <NextjsLogo
-                speed={logoSpeed}
-                radius={sizes.nextRadius}
-                rotationSpeed={logoRotationSpeed}
-                height={sizes.nextHeight}
-                scale={logoScale}
-              />
 
-              <Bonsai
-                position={sizes.bonsaiPosition}
-                scale={sizes.bonsaiScale}
-                rotation={[0, 4.1, 0]}
-              />
-            </HeroCamera>
+            <Css3Logo
+              speed={logoSpeed}
+              radius={sizes.cssRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.cssHeight}
+              scale={logoScale}
+            />
+            <JSLogo
+              speed={logoSpeed}
+              radius={sizes.jsRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.jsHeight}
+              scale={logoScale}
+            />
+            <ReactLogo
+              speed={logoSpeed}
+              radius={sizes.reactRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.reactHeight}
+              scale={logoScale}
+            />
+            <TailwindLogo
+              speed={logoSpeed}
+              radius={sizes.tailRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.tailHeight}
+              scale={logoScale}
+            />
+            <FramerLogo
+              speed={logoSpeed}
+              radius={sizes.framerRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.framerHeight}
+              scale={logoScale}
+            />
+            <TypescriptLogo
+              speed={logoSpeed}
+              radius={sizes.typeRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.typeHeight}
+              scale={logoScale}
+            />
+            <NextjsLogo
+              speed={logoSpeed}
+              radius={sizes.nextRadius}
+              rotationSpeed={logoRotationSpeed}
+              height={sizes.nextHeight}
+              scale={logoScale}
+            />
+
+            <Bonsai
+              position={sizes.bonsaiPosition}
+              scale={sizes.bonsaiScale}
+              rotation={[0, 4.1, 0]}
+            />
+            <perspectiveCamera makeDefault position={[10, 5, -20]} />
+
+            <AutoRotatingCamera />
             <group>
               <Moon
                 scale={sizes.moonScale}

@@ -1,6 +1,7 @@
-import { useState, Suspense, useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
-import { Center, OrbitControls } from "@react-three/drei";
+import { useState, Suspense, useEffect } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Center } from "@react-three/drei";
+import { Vector3 } from "three";
 import CanvasLoader from "../hero/CanvasLoader";
 import Button from "../hero/Button";
 import { IoCopy } from "react-icons/io5";
@@ -20,9 +21,9 @@ import ReactLogoA from "../3dLogoAbout/ReactLogoA";
 import TailwindLogoA from "../3dLogoAbout/TailwindLogoA";
 import TypescriptLogoA from "../3dLogoAbout/TypescriptLogoA";
 //******************************************
-import Technotron from "./Technotron";
-import Car from "./Car";
-import Turret from "./Turret";
+import EnergyStation from "./EnergyStation";
+import SpaceStation from "./SpaceStation";
+import Astronaut from "./Astronaut";
 //******************************************
 
 const SceneOne = () => {
@@ -46,13 +47,32 @@ const SceneOne = () => {
   );
 };
 
+const AutoRotatingCamera = () => {
+  const { camera } = useThree(); // Uzimamo glavnu kameru
+  const speed = 0.00015; // Brzina rotacije
+
+  // Koristimo useFrame da ažuriramo kameru u svakom frejmu
+  useFrame(() => {
+    // Rotiramo kameru oko scene (center)
+    const angle = speed * performance.now(); // Brzina rotacije u zavisnosti od vremena
+
+    // Računamo poziciju kamere
+    camera.position.x = Math.cos(angle) * 5; // X pozicija
+    camera.position.z = Math.sin(angle) * 5; // Z pozicija
+    camera.position.y = 0; // Visina kamere
+    camera.lookAt(new Vector3(-2, 0, 0)); // Kamera uvek gleda prema centru scene
+  });
+
+  return null;
+};
+
 const SceneTwo = () => {
   return (
     <Suspense fallback={<CanvasLoader />}>
       <ambientLight intensity={2} />
       <directionalLight position={[10, 10, 15]} />
-      <Center position={[0, -0.4, 0]} scale={1.4}>
-        <Technotron />
+      <Center position={[0, 0, -4]} scale={3.5} rotation={[0, -2.5, 0]}>
+        <EnergyStation />
       </Center>
     </Suspense>
   );
@@ -61,25 +81,33 @@ const SceneTwo = () => {
 const Scene3 = () => {
   return (
     <Suspense fallback={<CanvasLoader />}>
-      <ambientLight intensity={1} />
-      <directionalLight position={[10, 10, 5]} />
-      <OrbitControls />
-      <Center position={[0, 0, 0]}>
-        <group scale={1.2} position={[0, 0, 0]} rotation={[0, 4, 0]}>
-          <Car />
-        </group>
+      {/* <OrbitControls />      */}
+      <ambientLight intensity={4} color='#1B79CF' />
+      <directionalLight position={[10, 30, -50]} intensity={1} />
+      <spotLight
+        position={[-5, 5, -5]}
+        intensity={1}
+        color='blue'
+        angle={Math.PI / 6} // Ovaj parametar određuje širinu svetlosnog konusa
+        penumbra={1} // Izglađivanje ivica svetlosnog konusa
+        castShadow
+      />
+      <pointLight position={[5, 5, 5]} intensity={1} color='blue' castShadow />
+      <Center position={[0, 0, -120]} scale={3.5} rotation={[0, 2, 0]}>
+        <SpaceStation />
       </Center>
     </Suspense>
   );
 };
 
-const Scene4 = () => {
+const Scene4 = ({ aNum }) => {
   return (
     <Suspense fallback={<CanvasLoader />}>
-      <ambientLight intensity={2.5} />
-      <directionalLight position={[-10, 10, 5]} />
-      <Center position={[0, -1.3, 0]}>
-        <Turret scale={0.0088} rotation={[0, 0, 0]} />
+      <ambientLight intensity={4} />
+      <directionalLight position={[30, 30, 5]} />
+      <pointLight position={[5, 5, 5]} intensity={4} color='blue' castShadow />
+      <Center position={[0, -2.2, 0]} scale={2.8}>
+        <Astronaut rotation={[0, -0.4, 0]} aNum={aNum} />
       </Center>
     </Suspense>
   );
@@ -87,6 +115,7 @@ const Scene4 = () => {
 
 //******************************************
 const AboutSection = () => {
+  const [aNum, setANum] = useState(1);
   const [copyText, setCopyText] = useState(false);
   //----------------------------------------
   const [isMobile, setIsMobile] = useState(false);
@@ -126,7 +155,6 @@ const AboutSection = () => {
   }, [screenWidth]);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
       if (current > animateWidth) {
         setAnimate(true);
@@ -140,13 +168,13 @@ const AboutSection = () => {
   const handleCopy = () => {
     navigator.clipboard.writeText("mihajlo.levi@proton.me");
     setCopyText(true);
+    setANum(0);
 
     setTimeout(() => {
       setCopyText(false);
-    }, 5000);
+      setANum(1);
+    }, 5250);
   };
-
-  //car
 
   const delay = 0.9;
   const logoScale = 0.04;
@@ -180,6 +208,7 @@ const AboutSection = () => {
                 </Canvas>
                 <div>
                   <p className='grid-headtext'>Tech Stack</p>
+
                   <p className='grid-subtext'>
                     I&apos;ve built projects using JavaScript, CSS, Tailwind,
                     React, TypeScript, React-three-fiber, and Next.js.
@@ -206,14 +235,43 @@ const AboutSection = () => {
             >
               <div className='grid-container'>
                 {/* ---------------------------------------- */}
-                <img
-                  src='/photos/avatar2.webp'
-                  alt='avatar'
-                  className='w-full sm:h-[250px] h-fit object-contain'
-                />
+
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    // y: 0,
+                  }}
+                  animate={{
+                    // y: animate ? 0 : -300,
+                    opacity: animate ? 1 : 0,
+                  }}
+                  transition={{
+                    duration: delay + 0.7,
+                  }}
+                  className='w-full md:h-[250px] flex items-center justify-center border border-white-600/[0.1] rounded-lg 
+                  '
+                >
+                  <motion.img
+                    src='/photos/avatar.webp'
+                    alt='avatar'
+                    initial={{
+                      opacity: 0,
+                      y: 0,
+                    }}
+                    animate={{
+                      rotateX: animate ? 0 : 90,
+                      opacity: animate ? 0.6 : 0,
+                    }}
+                    transition={{
+                      duration: delay + 0.7,
+                    }}
+                    className='w-full md:h-[150px] h-fit object-contain opacity-60'
+                  />
+                </motion.div>
 
                 <div>
                   <p className='grid-headtext'>About me</p>
+
                   <p className='grid-subtext'>
                     I&apos;m a passionate web developer focused on modern
                     frontend and interactive user experiences. I love building
@@ -242,25 +300,31 @@ const AboutSection = () => {
               className='col-span-1 row-span-4 '
             >
               <div className='grid-container '>
-                <div className=' rounded-3xl w-full sm:h-[350px] md:h-[370px]  h-full flex justify-center items-center'>
-                  <Canvas
-                    // camera={{ position: [0, 0, -5] }}
-                    key={2}
-                    className='w-full h-fit  rounded-md'
-                  >
-                    <OrbitControls />
+                <div className=' rounded-lg w-full sm:h-[350px] md:h-[350px]  h-full flex justify-center items-center '>
+                  <Canvas key={2} className='w-full h-fit  rounded-md'>
+                    <perspectiveCamera makeDefault position={[10, 5, 10]} />
+
+                    <AutoRotatingCamera />
+
                     <SceneTwo />
                   </Canvas>
                 </div>
                 <div className='mt-2 md:mt-15'>
                   <p className='grid-headtext'>Fast & Reliable Websites</p>
+
                   <p className='grid-subtext'>
                     If you need a website built quickly and with high quality,
                     I&apos;m here to help. I specialize in creating clean,
                     functional, and responsive websites tailored to your needs.
                     Let&apos;s bring your idea to life!
                   </p>
-                  <Button name='Contact' isBeam containerClass='w-full mt-10' />
+                  <a href='#contact'>
+                    <Button
+                      name='Contact'
+                      isBeam
+                      containerClass='w-full mt-10'
+                    />
+                  </a>
                 </div>
               </div>
             </motion.div>
@@ -281,11 +345,12 @@ const AboutSection = () => {
               className='xl:col-span-2 xl:row-span-3 '
             >
               <div className='grid-container lg:h-[450px]'>
-                <Canvas className='rounded-md h-fit'>
+                <Canvas className='rounded-md h-fit' shadows>
                   <Scene3 />
                 </Canvas>
                 <div>
                   <p className='grid-headtext'>On the Horizon</p>
+
                   <p className='grid-subtext'>
                     Continuing to enhance my skills in JavaScript, React, and
                     Next.js, while exploring 3D modeling and deepening my
@@ -309,15 +374,15 @@ const AboutSection = () => {
               }}
               className='xl:col-span-1 xl:row-span-2 '
             >
-              <div className='grid-container lg:h-[270px] !pt-0 !gap-2'>
+              <div className='grid-container lg:h-[274px] !pt-0 !gap-2'>
                 <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
-                  <Scene4 />
+                  <Scene4 aNum={aNum} />
                 </Canvas>
 
                 <div className='space-y-2'>
                   <div className='copy-container' onClick={handleCopy}>
                     {copyText ? (
-                      <span className='inline grid-headtext mt-10'>
+                      <span className='inline grid-subtext mt-10 !text-white'>
                         Email copied successfully{"  "}
                         <GiCheckMark className='inline text-green-400 ' />
                       </span>
@@ -325,7 +390,7 @@ const AboutSection = () => {
                       <Button
                         name='Copy my email'
                         isBeam
-                        containerClass='mt-4 grid-headtext'
+                        containerClass='mt-4 grid-subtext !text-white'
                       >
                         <IoCopy />
                       </Button>
@@ -340,13 +405,16 @@ const AboutSection = () => {
         <div className='grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full'>
           <div className='col-span-1 xl:row-span-3'>
             <div className='grid-container'>
-              <img
-                src='/photos/avatar2.webp'
-                alt='avatar'
-                className='w-full sm:h-[250px] h-[250px] object-contain'
-              />
+              <div className='w-full h-[230px] sm:h-[230px] flex items-center justify-center border border-white-600/[0.1] rounded-lg'>
+                <img
+                  src='/photos/avatar.webp'
+                  alt='avatar'
+                  className='w-full sm:h-[150px] h-[150px] object-contain opacity-60'
+                />
+              </div>
               <div>
                 <p className='grid-headtext'>About me</p>
+
                 <p className='grid-subtext'>
                   I&apos;m a passionate web developer focused on modern frontend
                   and interactive user experiences. I love building elegant,
@@ -359,13 +427,16 @@ const AboutSection = () => {
           </div>
 
           <div className='col-span-1 row-span-3'>
-            <div className='grid-container'>
-              <Canvas key={1} className='w-full sm:h-[276px] h-fit'>
-                <SceneOne />
-              </Canvas>
+            <div className='grid-container '>
+              <div className='h-[280px] sm:h-[300px]'>
+                <Canvas key={1} className='w-full h-[250px] sm:h-[276px] '>
+                  <SceneOne />
+                </Canvas>
+              </div>
 
               <div>
                 <p className='grid-headtext'>Tech Stack</p>
+
                 <p className='grid-subtext'>
                   I&apos;ve built projects using JavaScript, CSS, Tailwind,
                   React, TypeScript, React-three-fiber, and Next.js.
@@ -376,30 +447,36 @@ const AboutSection = () => {
           <div className='col-span-1 row-span-4'>
             <div className='grid-container'>
               <div className='mt-8 rounded-3xl w-full sm:h-[350px] h-full flex justify-center items-center'>
-                <Canvas key={2} className='w-full  h-fit'>
-                  <OrbitControls />
+                <Canvas key={2} className='w-full rounded-md  h-fit'>
+                  <perspectiveCamera makeDefault position={[10, 5, 10]} />
+
+                  <AutoRotatingCamera />
                   <SceneTwo />
                 </Canvas>
               </div>
               <div className='mt-2 md:mt-20'>
                 <p className='grid-headtext'>Fast & Reliable Websites</p>
+
                 <p className='grid-subtext'>
                   If you need a website built quickly and with high quality,
                   I&apos;m here to help. I specialize in creating clean,
                   functional, and responsive websites tailored to your needs.
                   Let&apos;s bring your idea to life!
                 </p>
-                <Button name='Contact' isBeam containerClass='w-full mt-10' />
+                <a href='#contact'>
+                  <Button name='Contact' isBeam containerClass='w-full mt-10' />
+                </a>
               </div>
             </div>
           </div>
           <div className='xl:col-span-2 xl:row-span-3 '>
-            <div className='grid-container'>
-              <Canvas>
+            <div className='grid-container h-[250px] sm:h-[450px]'>
+              <Canvas className='rounded-md'>
                 <Scene3 />
               </Canvas>
               <div>
                 <p className='grid-headtext'>On the Horizon</p>
+
                 <p className='grid-subtext'>
                   Continuing to enhance my skills in JavaScript, React, and
                   Next.js, while exploring 3D modeling and deepening my
@@ -411,12 +488,12 @@ const AboutSection = () => {
           <div className='xl:col-span-1 xl:row-span-2 '>
             <div className='grid-container sm:h-[350px]'>
               <Canvas className='w-full md:h-[126px] sm:h-[276px] h-fit'>
-                <Scene4 />
+                <Scene4 aNum={aNum} />
               </Canvas>
               <div className='space-y-2'>
                 <div className='copy-container' onClick={handleCopy}>
                   {copyText ? (
-                    <span className='inline grid-headtext mt-12'>
+                    <span className='inline grid-subtext mt-12 !text-white'>
                       Email copied successfully{"  "}
                       <GiCheckMark className='inline text-green-400 ' />
                     </span>
@@ -424,7 +501,7 @@ const AboutSection = () => {
                     <Button
                       name='Copy my email'
                       isBeam
-                      containerClass='mt-6 grid-headtext'
+                      containerClass='mt-6 grid-subtext !text-white'
                     >
                       <IoCopy />
                     </Button>
@@ -440,5 +517,3 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
-
-//--------------------------------------

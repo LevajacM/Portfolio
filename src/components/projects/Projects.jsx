@@ -78,6 +78,7 @@ const Projects = () => {
   return (
     <section id='projects' className='c-space  mb-44'>
       <p className='head-text pt-8'>My Work</p>
+
       {!isMobile ? (
         <AnimatePresence mode='wait'>
           <div className='grid lg:grid-cols-2 grid-cols-1 mt-32 gap-5 w-full'>
@@ -87,8 +88,34 @@ const Projects = () => {
                 y: 0,
               }}
               animate={{
-                x: animate ? 0 : -100,
-                rotateY: animate ? 0 : 90,
+                opacity: animate ? 1 : 0,
+              }}
+              transition={{
+                duration: 0.9,
+              }}
+              className='border border-black-300 bg-black-200 rounded-lg h-96 md:h-full'
+            >
+              <Canvas>
+                <ambientLight intensity={Math.PI} />
+                <directionalLight position={[10, 10, 5]} />
+                <Center position={[0, 0, -2.5]}>
+                  <Suspense fallback={<CanvasLoader />}>
+                    <group scale={0.03} rotation={[0.2, 0, 0]}>
+                      <LaptopCyber texture={currentProject.texture} />
+                    </group>
+                  </Suspense>
+                </Center>
+                <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
+              </Canvas>
+            </motion.div>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 0,
+              }}
+              animate={{
+                x: animate ? 0 : 100,
+                rotateY: animate ? 0 : -90,
                 opacity: animate ? 1 : 0,
               }}
               transition={{
@@ -96,13 +123,6 @@ const Projects = () => {
               }}
               className='flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200'
             >
-              <div className='absolute top-0 right-0'>
-                <img
-                  src={currentProject.spotlight}
-                  alt='spotlight'
-                  className='w-full h-96 object-cover rounded-xl'
-                />
-              </div>
               <div
                 className='p-3 backdrop-blur-3xl backdrop-filter w-fit rounded-lg'
                 style={currentProject.logoStyle}
@@ -110,11 +130,11 @@ const Projects = () => {
                 <img
                   src={currentProject.logo}
                   alt='logo'
-                  className='w-10 h-10 shadow-sm'
+                  className='w-10 h-10 shadow-sm rounded-md'
                 />
               </div>
               <div className='flex flex-col gap-5 text-white-600 my-5'>
-                <p className='text-white text-2xl font-semibold animated-text'>
+                <p className='text-white-300 text-2xl font-semibold animated-text'>
                   {currentProject.title}
                 </p>
                 <p className='animatedText'>{currentProject.desc}</p>
@@ -165,56 +185,23 @@ const Projects = () => {
                 </button>
               </div>
             </motion.div>
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 0,
-              }}
-              animate={{
-                opacity: animate ? 1 : 0,
-              }}
-              transition={{
-                duration: 0.9,
-              }}
-              className='border border-black-300 bg-black-200 rounded-lg h-96 md:h-full'
-            >
-              <Canvas>
-                <ambientLight intensity={Math.PI} />
-                <directionalLight position={[10, 10, 5]} />
-                <Center position={[0, 0, -2.5]}>
-                  <Suspense fallback={<CanvasLoader />}>
-                    <group scale={0.03} rotation={[0.2, 0, 0]}>
-                      <LaptopCyber texture={currentProject.texture} />
-                    </group>
-                  </Suspense>
-                </Center>
-                <OrbitControls maxPolarAngle={Math.PI / 2} enableZoom={false} />
-              </Canvas>
-            </motion.div>
           </div>
         </AnimatePresence>
       ) : (
         <div className='grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full'>
           <div className='flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200'>
-            <div className='absolute top-0 right-0'>
-              <img
-                src={currentProject.spotlight}
-                alt='spotlight'
-                className='w-full h-96 object-cover rounded-xl'
-              />
-            </div>
             <div
-              className='p-3 backdrop-blur-3xl backdrop-filter w-fit rounded-lg'
+              className='p-2 backdrop-blur-3xl backdrop-filter w-fit rounded-lg'
               style={currentProject.logoStyle}
             >
               <img
                 src={currentProject.logo}
                 alt='logo'
-                className='w-10 h-10 shadow-sm'
+                className='w-10 h-10 shadow-sm rounded-md'
               />
             </div>
             <div className='flex flex-col gap-5 text-white-600 my-5'>
-              <p className='text-white text-2xl font-semibold animated-text'>
+              <p className='text-white-300 text-2xl font-semibold animated-text'>
                 {currentProject.title}
               </p>
               <p className='animatedText'>{currentProject.desc}</p>
