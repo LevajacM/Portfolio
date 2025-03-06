@@ -48,7 +48,7 @@ export const recentProjects = [
     subdesc:
       "The idea behind the site is simple: let people check out the menu and get in touch easily. It's not for online orders — specialized delivery services handle that part. It's more about giving the brand a modern, tech-savvy look while making it easy for customers to connect. Perfect for a small business that wants to stand out!",
     href: "https://www.mrpacalinkovic.com",
-    texture: "/textures/mr-pacalinkovic-360p.mp4",
+    texture: "/textures/snimak1.mp4",
     logo: "/photos/project-logo1.png",
     logoStyle: {
       backgroundColor: "#2A1816",

@@ -19,7 +19,7 @@ const LaptopCyber = (props) => {
   );
 
   const txt = useVideoTexture(
-    props.texture ? props.texture : "/textures/mr-pacalinkovic-360p.mp4"
+    props.texture ? props.texture : "/textures/snimak1.mp4"
   );
 
   useGSAP(() => {
