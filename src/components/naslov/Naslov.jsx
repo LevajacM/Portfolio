@@ -2,14 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { TextGenerateEffect } from "./TextGenerateEffect";
 
 const Naslov = ({ text, className, duration, textCol }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
   const elementRef = useRef(null);
-  const [showTextEffect, setShowTextEffect] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting && !hasLoaded) {
+          setHasLoaded(true);
+        }
       },
       { threshold: 1 }
     );
@@ -23,19 +24,11 @@ const Naslov = ({ text, className, duration, textCol }) => {
         observer.unobserve(elementRef.current);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    if (isVisible) {
-      setShowTextEffect(true);
-    } else {
-      setShowTextEffect(false);
-    }
-  }, [isVisible]);
+  }, [hasLoaded]);
 
   return (
     <div ref={elementRef} className='pt-0'>
-      {showTextEffect && (
+      {hasLoaded && (
         <TextGenerateEffect
           words={text}
           className={className}

@@ -51,7 +51,7 @@ const ContactPage = () => {
 
   return (
     <section id='contact' className='c-space my-6 sm:my-20'>
-      <div className='h-[90vh] sm:min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300 '>
+      <div className='min-h-screen flex items-center justify-center flex-col bg-black-200 rounded-lg border border-black-300 '>
         <div className='contact-container relative'>
           <Naslov
             text='Contact Me'
