@@ -48,11 +48,7 @@ const Hero = ({ titleZInd }) => {
   const calcInset = (width - 1280) / 2;
 
   return (
-    <section
-      id='home'
-      className={`min-h-screen w-full   flex flex-col relative 2xl:w-[1530px] 2xl:-inset-x-[125px] 
-      3xl:w-[1630px] 3xl:-inset-x-[175px] 4xl:w-[1730px] 4xl:-inset-x-[225px] 5xl:w-[1830px] 5xl:-inset-x-[275px]`}
-    >
+    <section id='home' className='min-h-screen w-full   flex flex-col relative'>
       <div
         className={`w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3 ${titleZInd}`}
       >
