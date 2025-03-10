@@ -78,6 +78,37 @@ export const recentProjects = [
       },
     ],
   },
+  {
+    title: "Piano 🎹",
+    desc: "This is a small project I created just for fun, called Piano. It's a virtual piano that can be played using the keyboard or mouse. It also features an asynchronous JavaScript function (which you can trigger) that plays music. The project is built with vanilla JavaScript, vanilla CSS, and includes a 3D model imported via THREE.js using a GLTF file. It was created just for practice and experimentation.",
+    subdesc:
+      "Since the asynchronous function that plays the music is quite long and demanding for the browser, it can be a bit heavy on performance. To ensure it works smoothly, it's best to open the project in Google Chrome. Other browsers might struggle to keep up, so Chrome is your best bet.",
+    href: "https://levajacm.github.io/Piano/#",
+    texture: "/textures/p.mp4",
+    logo: "/photos/piano.png",
+    logoStyle: {
+      backgroundColor: "#d68b83",
+      border: "0.2px solid #36201D",
+      boxShadow: "0px 0px 60px 0px rgba(50, 50, 50, 0.7)",
+    },
+    tags: [
+      {
+        id: 1,
+        name: "JavaScript",
+        path: "/photos/js.png",
+      },
+      {
+        id: 2,
+        name: "CSS3",
+        path: "/photos/css-3.png",
+      },
+      {
+        id: 3,
+        name: "THREE",
+        path: "/photos/Threejs-logo.png",
+      },
+    ],
+  },
 ];
 
 export const approachList = [
