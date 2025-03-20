@@ -79,6 +79,42 @@ export const recentProjects = [
     ],
   },
   {
+    title: "AKSM 🛩",
+    desc: "I'm currently working on a project that's still a work in progress. It features some dummy images and videos at the moment. The project is built using React and Tailwind, with 3D models integrated through React Fiber and Three Drei. It's not fully finished yet, but it's coming together nicely. I'm still polishing a few details and working on the overall experience.",
+    subdesc:
+      "This is the website for a local aero club. The goal is to showcase the club and all its activities to both local and international visitors, providing information and promoting the club's offerings in an engaging way.",
+    href: "https://aksm-psi.vercel.app/",
+    texture: "/textures/aksm.mp4",
+    logo: "/photos/aksm.png",
+    logoStyle: {
+      backgroundColor: "#54defd",
+      border: "0.2px solid #017ec1",
+      boxShadow: "0px 0px 60px 0px rgba(50, 50, 50, 0.7)",
+    },
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/photos/react.svg",
+      },
+      {
+        id: 2,
+        name: "TailwindCSS",
+        path: "/photos/tailwindcss.png",
+      },
+      {
+        id: 3,
+        name: "THREE",
+        path: "/photos/Threejs-logo.png",
+      },
+      {
+        id: 4,
+        name: "Framer Motion",
+        path: "/photos/framer.svg",
+      },
+    ],
+  },
+  {
     title: "Piano 🎹",
     desc: "This is a small project I created just for fun, called Piano. It's a virtual piano that can be played using the keyboard or mouse. It also features an asynchronous JavaScript function (which you can trigger) that plays music. The project is built with vanilla JavaScript, vanilla CSS, and includes a 3D model imported via THREE.js using a GLTF file. It was created just for practice and experimentation.",
     subdesc:
