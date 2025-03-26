@@ -131,7 +131,7 @@ const AboutSection = () => {
   }
 
   const checkWindowSize = () => {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 768 || window.innerHeight < 600) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
